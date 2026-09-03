@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ep.3 Fonts — LaCalaPodcast</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Playfair+Display:ital,wght@0,700;0,800;1,700&display=swap">
+  <style>
+    /* ── Paleta fixa (igual que el fòrum) ─────────── */
+    :root {
+      --navy:   #082f63;
+      --blue:   #1767b1;
+      --sky:    #8bc4e9;
+      --coral:  #ee735c;
+      --ink:    #11233b;
+      --muted:  #62748b;
+      --paper:  #f7f4ee;
+      --deep:   #eee9df;
+      --white:  #fffdf9;
+      --line:   #d9d7d0;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: "DM Sans", Arial, sans-serif;
+      line-height: 1.6;
+    }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; cursor: pointer; }
+
+    /* ── Topline ──────────────────────────────────── */
+    .topline {
+      background: var(--navy);
+      color: rgba(255,255,255,.8);
+      font: 11px "DM Mono", monospace;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .topline-inner {
+      max-width: 960px;
+      margin-inline: auto;
+      padding: 0 24px;
+      min-height: 34px;
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    }
+    .signal { display: inline-flex; align-items: center; gap: 8px; }
+    .signal i {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--coral); box-shadow: 0 0 0 4px rgba(238,115,92,.22);
+    }
+    .topline strong { color: #fff; font-weight: 500; }
+
+    /* ── Nav sticky ───────────────────────────────── */
+    .top-nav {
+      position: sticky; top: 0; z-index: 30;
+      background: rgba(247,244,238,.92);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(12px);
+    }
+    .top-nav-inner {
+      max-width: 960px;
+      margin-inline: auto;
+      padding: 0 24px;
+      min-height: 58px;
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    }
+    .back-link {
+      display: inline-flex; align-items: center; gap: 7px;
+      font: 600 12px "DM Sans", Arial, sans-serif;
+      color: var(--muted);
+      transition: color .15s;
+    }
+    .back-link:hover { color: var(--ink); }
+    .back-link svg { width: 15px; height: 15px; }
+    .nav-ep {
+      font: 500 11px "DM Mono", monospace;
+      letter-spacing: .1em; text-transform: uppercase;
+      color: var(--coral);
+    }
+    .saved-toast {
+      font: 500 10px "DM Mono", monospace;
+      letter-spacing: .06em;
+      color: var(--blue);
+      opacity: 0; transition: opacity .3s;
+    }
+    .saved-toast.show { opacity: 1; }
+
+    /* ── Page header ──────────────────────────────── */
+    .page-header {
+      max-width: 960px;
+      margin-inline: auto;
+      padding: 44px 24px 30px;
+      border-bottom: 1px solid var(--line);
+    }
+    .ep-eyebrow {
+      font: 500 10px "DM Mono", monospace;
+      letter-spacing: .14em; text-transform: uppercase;
+      color: var(--coral);
+      margin-bottom: 10px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .ep-eyebrow::before { content: ""; width: 24px; height: 1px; background: var(--coral); }
+    .page-title {
+      font: 800 clamp(28px, 4vw, 42px)/1.08 "Playfair Display", Georgia, serif;
+      color: var(--navy);
+      letter-spacing: -.03em;
+      text-wrap: balance;
+      margin-bottom: 14px;
+    }
+    .page-title em { font-style: italic; color: var(--blue); }
+    .page-meta {
+      display: flex; flex-wrap: wrap; gap: 6px 18px;
+      font: 400 11px "DM Mono", monospace;
+      color: var(--muted);
+    }
+    .page-meta span { display: inline-flex; align-items: center; gap: 5px; }
+
+    /* ── Edit hint ────────────────────────────────── */
+    .edit-hint {
+      max-width: 960px;
+      margin-inline: auto;
+      padding: 9px 24px;
+      display: flex; align-items: center; gap: 8px;
+      font: 400 11px "DM Mono", monospace;
+      color: var(--muted);
+      background: var(--white);
+      border-bottom: 1px solid var(--line);
+    }
+    .edit-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--coral); flex-shrink: 0; }
+
+    /* ── Seccions de document ─────────────────────── */
+    .main-wrap { max-width: 960px; margin-inline: auto; padding: 0 24px; }
+
+    .doc-block { padding: 40px 0 0; }
+    .doc-block + .doc-block {
+      border-top: 1px solid var(--line);
+      margin-top: 44px;
+    }
+
+    .doc-header {
+      display: flex; align-items: flex-start; gap: 14px;
+      margin-bottom: 20px;
+    }
+    .doc-icon {
+      width: 44px; height: 44px; flex-shrink: 0;
+      border-radius: 8px;
+      display: grid; place-items: center;
+      font-size: 22px;
+    }
+    .doc-icon.pdf   { background: rgba(220,55,45,.09); }
+    .doc-icon.audio { background: rgba(23,103,177,.1); }
+
+    .doc-header-text { flex: 1; }
+    .doc-type-badge {
+      display: inline-block;
+      font: 600 9px "DM Mono", monospace;
+      letter-spacing: .13em; text-transform: uppercase;
+      background: rgba(8,47,99,.07);
+      color: var(--blue);
+      padding: 2px 7px; border-radius: 3px;
+      margin-bottom: 5px;
+    }
+    .doc-type-badge.audio { background: rgba(238,115,92,.1); color: var(--coral); }
+    .doc-name {
+      font: 700 19px/1.2 "DM Sans", Arial, sans-serif;
+      color: var(--navy);
+      margin-bottom: 3px;
+    }
+    .doc-size {
+      font: 400 11px "DM Mono", monospace;
+      color: var(--muted);
+    }
+    .dl-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      border: 1px solid var(--line); border-radius: 4px;
+      background: var(--white);
+      color: var(--ink);
+      font: 600 11px "DM Sans", Arial, sans-serif;
+      padding: 8px 13px;
+      transition: background .15s, border-color .15s;
+      white-space: nowrap; flex-shrink: 0;
+    }
+    .dl-btn:hover { background: var(--deep); border-color: var(--muted); }
+    .dl-btn svg { width: 12px; height: 12px; }
+
+    /* Descripció editable */
+    .desc-label { display: none; }
+    .desc-field {
+      display: block;
+      width: 100%;
+      min-height: 52px;
+      padding: 14px 18px 14px 22px;
+      background: var(--deep);
+      border: none;
+      border-left: 3px solid var(--coral);
+      border-radius: 0 4px 4px 0;
+      font: 400 15px/1.7 "DM Sans", Arial, sans-serif;
+      color: var(--ink);
+      outline: none;
+      white-space: pre-wrap;
+      transition: border-left-color .2s, background .2s;
+      margin-bottom: 20px;
+    }
+    .desc-field:focus {
+      border-left-color: var(--blue);
+      background: rgba(23,103,177,.06);
+    }
+    .desc-field.empty::before {
+      content: attr(data-placeholder);
+      color: var(--muted);
+      font-style: italic;
+      pointer-events: none;
+    }
+    .desc-field.empty:focus::before { display: none; }
+
+    /* Visor PDF */
+    .pdf-wrap {
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      overflow: hidden;
+      background: #fff;
+    }
+    .pdf-embed {
+      width: 100%;
+      height: 580px;
+      border: none;
+      display: block;
+    }
+    .pdf-bar {
+      border-top: 1px solid var(--line);
+      background: var(--white);
+      padding: 9px 16px;
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      font: 400 11px "DM Mono", monospace;
+      color: var(--muted);
+    }
+    .pdf-bar a { color: var(--blue); font-weight: 600; }
+
+    /* Player àudio */
+    .audio-wrap {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 20px 22px;
+    }
+    .audio-label {
+      font: 600 9px "DM Mono", monospace;
+      letter-spacing: .13em; text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+    .audio-wrap audio { width: 100%; }
+
+    /* ── Footer ───────────────────────────────────── */
+    .page-footer {
+      max-width: 960px;
+      margin-inline: auto;
+      padding: 40px 24px 64px;
+      border-top: 1px solid var(--line);
+      margin-top: 52px;
+      display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap;
+    }
+    .footer-brand { font: 700 14px "Playfair Display", Georgia, serif; color: var(--muted); }
+    .footer-note  { font: 400 11px "DM Mono", monospace; color: var(--muted); }
+
+    /* ── Responsive ───────────────────────────────── */
+    @media (max-width: 600px) {
+      .page-header, .main-wrap { padding-left: 16px; padding-right: 16px; }
+      .top-nav-inner, .topline-inner, .edit-hint { padding-left: 16px; padding-right: 16px; }
+      .doc-header { flex-wrap: wrap; }
+      .pdf-embed { height: 440px; }
+      .page-footer { padding: 32px 16px 48px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Topline -->
+<div class="topline">
+  <div class="topline-inner">
+    <span class="signal"><i></i><strong>Ep. 03</strong> · Fonts i documents</span>
+    <span>LaCalaPodcast · L'Ametlla de Mar</span>
+  </div>
+</div>
+
+<!-- Nav sticky -->
+<nav class="top-nav">
+  <div class="top-nav-inner">
+    <a class="back-link" href="lacalapodcast-forum.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      Tornar al Fòrum
+    </a>
+    <span class="nav-ep">El retorn a l'alcaldia</span>
+    <span class="saved-toast" id="saved-toast" aria-live="polite">✓ Guardat</span>
+  </div>
+</nav>
+
+<!-- Capçalera -->
+<header class="page-header">
+  <div class="ep-eyebrow">Episodi 03 · 4 Juny 2026</div>
+  <h1 class="page-title"><em>El retorn a l'alcaldia</em> — Fonts</h1>
+  <div class="page-meta">
+    <span>
+      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+      6 documents PDF
+    </span>
+    <span>
+      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+      1 gravació d'àudio
+    </span>
+  </div>
+  <a href="ep3-preguntes.html" style="display:inline-flex;align-items:center;gap:6px;margin-top:16px;font:600 12px 'DM Sans',Arial,sans-serif;color:var(--blue);text-decoration:none;">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    Veure preguntes de l'entrevista →
+  </a>
+</header>
+
+<!-- Hint edició -->
+<div class="edit-hint">
+  <span class="edit-dot"></span>
+  Clica qualsevol descripció per editar-la — els canvis es guarden automàticament al navegador.
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<div class="main-wrap">
+
+  <!-- Document 1: Acta del Ple 27/03/2025 -->
+  <div class="doc-block" id="ple-270325">
+    <div class="doc-header">
+      <div class="doc-icon pdf">📄</div>
+      <div class="doc-header-text">
+        <span class="doc-type-badge">Document PDF</span>
+        <div class="doc-name">Acta del Ple — 27 de març de 2025</div>
+        <div class="doc-size">1,16 MB</div>
+      </div>
+      <a class="dl-btn" href="EPISODI 3/forumep3/20250603_Acta_Acta ple_ACTA DEL PLE 2025-0003 [Acta Ple 3_2025 de 27_03_2025].pdf" download="Acta Ple 27-03-2025 - Ep3 LaCalaPodcast.pdf">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Descarrega
+      </a>
+    </div>
+
+    <div class="desc-label">Context del document</div>
+    <div
+      id="desc-ple-270325"
+      contenteditable="true"
+      class="desc-field"
+      data-placeholder="Escriu aquí el context d'aquest document..."
+      data-key="lcp_ep3_desc_ple_270325"
+      role="textbox"
+      aria-multiline="true"
+    >Document clau per a la pregunta 6 de l'entrevista. Recull la intervenció de Gaseni —des de l'oposició— en la qual exigeix al govern PSC-Junts que inclogui l'asfaltatge de camins a les Tres Cales al pressupost del 2025, recordant que el seu govern havia renovat 4 km de camins en quatre anys, i al·lega la preocupació de l'associació de veïns Mestral XXI per la manca d'inversió. Eva del Amo li respon que l'executaran "fins l'any que ve". Aquesta intervenció, contrastada amb l'eliminació posterior d'aquest projecte quan Gaseni arriba al poder, és la trampa documental de la pregunta 6. L'acta conté també el debat sobre Roques Daurades, el Pla Parcial de Tres Cales 2a Fase i el volum real del deute municipal.</div>
+
+    <div class="pdf-wrap">
+      <embed
+        class="pdf-embed"
+        src="EPISODI 3/forumep3/20250603_Acta_Acta%20ple_ACTA%20DEL%20PLE%202025-0003%20%5BActa%20Ple%203_2025%20de%2027_03_2025%5D.pdf#page=1&view=FitH&toolbar=0&navpanes=0&scrollbar=0"
+        type="application/pdf"
+        title="Acta del Ple 27/03/2025 — pàgina 1"
+      >
+      <div class="pdf-bar">
+        <span>Acta del Ple 27/03/2025 · Primera pàgina</span>
+        <a href="EPISODI 3/forumep3/20250603_Acta_Acta ple_ACTA DEL PLE 2025-0003 [Acta Ple 3_2025 de 27_03_2025].pdf" target="_blank">Obre el document complet ↗</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Document 2: Acta del Ple 30/09/2025 -->
+  <div class="doc-block" id="ple-300925">
+    <div class="doc-header">
+      <div class="doc-icon pdf">📄</div>
+      <div class="doc-header-text">
+        <span class="doc-type-badge">Document PDF</span>
+        <div class="doc-name">Acta del Ple — 30 de setembre de 2025</div>
+        <div class="doc-size">0,83 MB</div>
+      </div>
+      <a class="dl-btn" href="EPISODI 3/forumep3/PLE-30-9-2025.pdf" download="Acta Ple 30-09-2025 - Ep3 LaCalaPodcast.pdf">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Descarrega
+      </a>
+    </div>
+
+    <div class="desc-label">Context del document</div>
+    <div
+      id="desc-ple-300925"
+      contenteditable="true"
+      class="desc-field"
+      data-placeholder="Escriu aquí el context d'aquest document..."
+      data-key="lcp_ep3_desc_ple_300925"
+      role="textbox"
+      aria-multiline="true"
+    >Relacionat amb les preguntes 4 i 7 de l'entrevista. Conté la intervenció del regidor Espuny en la qual afirma que dues parcel·les properes a la via del tren es vendran per 460.000 €, xifra directament contrastada a la pregunta 7 amb la taxació dels arquitectes municipals (255.000 €) i les ofertes reals del mercat (165.000 €). L'acta inclou també el gran debat sobre el deute municipal: Espuny documenta que el deute heretat l'any 2015 era de 31,8 M€ i que ERC en va pagar 15 M€ en vuit anys. La moció d'ERC per aturar la venda de la Residència d'Avis Onada —amb la proposta alternativa de vendre el solar del carrer Camarles i refinançar el deute— il·lustra l'estat financer del municipi que Gaseni va heretar en arribar al poder (Q4). Aprovació dels comptes generals 2024 per 7-6.</div>
+
+    <div class="pdf-wrap">
+      <embed
+        class="pdf-embed"
+        src="EPISODI 3/forumep3/PLE-30-9-2025.pdf#page=1&view=FitH&toolbar=0&navpanes=0&scrollbar=0"
+        type="application/pdf"
+        title="Acta del Ple 30/09/2025 — pàgina 1"
+      >
+      <div class="pdf-bar">
+        <span>Acta del Ple 30/09/2025 · Primera pàgina</span>
+        <a href="EPISODI 3/forumep3/PLE-30-9-2025.pdf" target="_blank">Obre el document complet ↗</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Document 3: Acta del Ple 18/11/2025 -->
+  <div class="doc-block" id="ple-181125">
+    <div class="doc-header">
+      <div class="doc-icon pdf">📄</div>
+      <div class="doc-header-text">
+        <span class="doc-type-badge">Document PDF</span>
+        <div class="doc-name">Acta del Ple — 18 de novembre de 2025</div>
+        <div class="doc-size">1,13 MB</div>
+      </div>
+      <a class="dl-btn" href="EPISODI 3/forumep3/PLE-18-11-2025.pdf" download="Acta Ple 18-11-2025 - Ep3 LaCalaPodcast.pdf">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Descarrega
+      </a>
+    </div>
+
+    <div class="desc-label">Context del document</div>
+    <div
+      id="desc-ple-181125"
+      contenteditable="true"
+      class="desc-field"
+      data-placeholder="Escriu aquí el context d'aquest document..."
+      data-key="lcp_ep3_desc_ple_181125"
+      role="textbox"
+      aria-multiline="true"
+    >Document de context per a les preguntes 4 i 7 de l'entrevista. Recull l'inici del procés de municipalització del servei d'aigua a les Tres Cales —Aguas Las Tres Calas portava quatre anys incomplint la concessió i havia acumulat sis multes coercitives de 3.000 € sense resposta—, que il·lustra l'estat de l'administració que Gaseni va trobar en arribar al poder (Q4). Inclou la petició de 32 propietaris per a la revisió del sector 22B1 i la modificació de la taxa d'escombraries, aspectes relacionats amb la gestió de parcel·les i tributs tractats a les preguntes 7 i 10. Nota: Gaseni va excusar la seva absència per malaltia; el ple el presideix Eva del Amo.</div>
+
+    <div class="pdf-wrap">
+      <embed
+        class="pdf-embed"
+        src="EPISODI 3/forumep3/PLE-18-11-2025.pdf#page=1&view=FitH&toolbar=0&navpanes=0&scrollbar=0"
+        type="application/pdf"
+        title="Acta del Ple 18/11/2025 — pàgina 1"
+      >
+      <div class="pdf-bar">
+        <span>Acta del Ple 18/11/2025 · Primera pàgina</span>
+        <a href="EPISODI 3/forumep3/PLE-18-11-2025.pdf" target="_blank">Obre el document complet ↗</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Document 4: Butlletí n.564 -->
+  <div class="doc-block" id="butlleti-564">
+    <div class="doc-header">
+      <div class="doc-icon pdf">📄</div>
+      <div class="doc-header-text">
+        <span class="doc-type-badge">Document PDF</span>
+        <div class="doc-name">Butlletí n.564</div>
+        <div class="doc-size">2,49 MB</div>
+      </div>
+      <a class="dl-btn" href="EPISODI 3/forumep3/BUTLLETI-564-IMPRIMIR-1.pdf" download="Butlleti-564 - Ep3 LaCalaPodcast.pdf">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Descarrega
+      </a>
+    </div>
+
+    <div class="desc-label">Context del document</div>
+    <div
+      id="desc-butlleti564"
+      contenteditable="true"
+      class="desc-field"
+      data-placeholder="Escriu aquí el context d'aquest document..."
+      data-key="lcp_ep3_desc_butlleti564"
+      role="textbox"
+      aria-multiline="true"
+    >Relacionat amb la pregunta 7 de l'entrevista. Publicació oficial on consta la declaració del regidor Antoni Espuny en la qual promet que dues parcel·les municipals —taxades pels arquitectes de l'ajuntament en 255.000 €— s'obtindran per 460.000 € en la subhasta pública. Evidència documental de la discrepància entre el que promet el polític i el que valora el tècnic, contrastada posteriorment amb les ofertes reals del mercat (165.000 €).</div>
+
+    <div class="pdf-wrap">
+      <embed
+        class="pdf-embed"
+        src="EPISODI 3/forumep3/BUTLLETI-564-IMPRIMIR-1.pdf#page=2&view=FitH&toolbar=0&navpanes=0&scrollbar=0"
+        type="application/pdf"
+        title="Butlletí n.564 — pàgina 2"
+      >
+      <div class="pdf-bar">
+        <span>Butlletí n.564 · Segona pàgina</span>
+        <a href="EPISODI 3/forumep3/BUTLLETI-564-IMPRIMIR-1.pdf" target="_blank">Obre el document complet ↗</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Document 5: STC 87/2024 -->
+  <div class="doc-block" id="stc-87-2024">
+    <div class="doc-header">
+      <div class="doc-icon pdf">📄</div>
+      <div class="doc-header-text">
+        <span class="doc-type-badge">Document PDF</span>
+        <div class="doc-name">STC 87/2024 — Tribunal Constitucional</div>
+        <div class="doc-size">0,51 MB</div>
+      </div>
+      <a class="dl-btn" href="EPISODI 3/forumep3/STC 87-2024.pdf" download="STC-87-2024 - Ep3 LaCalaPodcast.pdf">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Descarrega
+      </a>
+    </div>
+
+    <div class="desc-label">Context del document</div>
+    <div
+      id="desc-stc87"
+      contenteditable="true"
+      class="desc-field"
+      data-placeholder="Escriu aquí el context d'aquest document..."
+      data-key="lcp_ep3_desc_stc87"
+      role="textbox"
+      aria-multiline="true"
+    >Relacionada amb la pregunta 9 de l'entrevista. Sentència 87/2024 de l'Audiència Provincial de Tarragona que condemna La Cala Gestió —l'entitat pública empresarial de l'ajuntament— per "incompliment greu del contracte" i l'obliga a abonar 240.897 € a la constructora. El cas: el juny de 2015, dies després que Gaseni prengués possessió com a alcalde, La Cala Gestió va paralitzar les obres del pont sobre l'AP-7 i la via del tren a les Tres Cales adduint manca de finançament. El pont no es va reprendre durant els vuit anys de govern. La connexió és doble: la sentència condemna la gestió del govern Gaseni, i al ple del 27 de març de 2025 —ja com a oposició— Gaseni criticava la manca d'inversió a les Tres Cales.</div>
+
+    <div class="pdf-wrap">
+      <embed
+        class="pdf-embed"
+        src="EPISODI 3/forumep3/STC%2087-2024.pdf#page=1&view=FitH&toolbar=0&navpanes=0&scrollbar=0"
+        type="application/pdf"
+        title="STC 87/2024 — pàgina 1"
+      >
+      <div class="pdf-bar">
+        <span>STC 87/2024 · Primera pàgina</span>
+        <a href="EPISODI 3/forumep3/STC 87-2024.pdf" target="_blank">Obre el document complet ↗</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Document 6: Captures Facebook -->
+  <div class="doc-block" id="captures-facebook">
+    <div class="doc-header">
+      <div class="doc-icon pdf">📄</div>
+      <div class="doc-header-text">
+        <span class="doc-type-badge">Document PDF</span>
+        <div class="doc-name">Captures Facebook</div>
+        <div class="doc-size">0,08 MB</div>
+      </div>
+      <a class="dl-btn" href="EPISODI 3/forumep3/Captures Facebook.pdf" download="Captures-Facebook - Ep3 LaCalaPodcast.pdf">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Descarrega
+      </a>
+    </div>
+
+    <div class="desc-label">Context del document</div>
+    <div
+      id="desc-facebook"
+      contenteditable="true"
+      class="desc-field"
+      data-placeholder="Escriu aquí el context d'aquest document..."
+      data-key="lcp_ep3_desc_facebook"
+      role="textbox"
+      aria-multiline="true"
+    >Evidència documental relacionada amb les preguntes 4 i 10 de l'entrevista. Captures de publicacions de Facebook que il·lustren dues qüestions: la promesa de servei de SUM (servei d'urgències mèdiques) disponible les 24 hores, i la despesa en assessorament extern de l'ajuntament. Declararions públiques de càrrecs municipals que es poden contrastar amb la gestió real documentada a les actes de ple.</div>
+
+    <div class="pdf-wrap">
+      <embed
+        class="pdf-embed"
+        src="EPISODI 3/forumep3/Captures%20Facebook.pdf#page=1&view=FitH&toolbar=0&navpanes=0&scrollbar=0"
+        type="application/pdf"
+        title="Captures Facebook — pàgina 1"
+      >
+      <div class="pdf-bar">
+        <span>Captures Facebook · Primera pàgina</span>
+        <a href="EPISODI 3/forumep3/Captures Facebook.pdf" target="_blank">Obre el document complet ↗</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Àudio: PortaveusEspuny.mp3 -->
+  <div class="doc-block" id="portaveus-espuny">
+    <div class="doc-header">
+      <div class="doc-icon audio">🎙️</div>
+      <div class="doc-header-text">
+        <span class="doc-type-badge audio">Gravació d'àudio</span>
+        <div class="doc-name">Portaveus — Antonio Espuny</div>
+        <div class="doc-size">51,80 MB</div>
+      </div>
+      <a class="dl-btn" href="EPISODI 3/forumep3/PortaveusEspuny.mp3" download="PortaveusEspuny - Ep3 LaCalaPodcast.mp3">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Descarrega
+      </a>
+    </div>
+
+    <div class="desc-label">Context de la gravació</div>
+    <div
+      id="desc-audio"
+      contenteditable="true"
+      class="desc-field"
+      data-placeholder="Escriu aquí el context d'aquesta gravació..."
+      data-key="lcp_ep3_desc_audio"
+      role="textbox"
+      aria-multiline="true"
+    >Relacionat amb la pregunta 7 de l'entrevista. Gravació on el regidor Antoni Espuny afirma públicament que dues parcel·les municipals —taxades pels arquitectes en 255.000 €— s'obtindran per 460.000 € en la subhasta. Declaració oral que acompanya l'evidència documental del Butlletí n.564 i que, contrastada amb les ofertes reals del mercat (165.000 €), il·lustra la distància entre el que promet el polític i el que valora el mercat.</div>
+
+    <div class="audio-wrap">
+      <div class="audio-label">Reproducció</div>
+      <audio controls preload="metadata">
+        <source src="EPISODI 3/forumep3/PortaveusEspuny.mp3" type="audio/mpeg">
+        El teu navegador no admet l'element d'àudio.
+      </audio>
+    </div>
+  </div>
+
+</div><!-- /main-wrap -->
+
+<!-- Footer -->
+<footer class="page-footer">
+  <span class="footer-brand">LaCalaPodcast</span>
+  <span class="footer-note">Les descripcions es desen localment al navegador.</span>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+  var toast = document.getElementById('saved-toast');
+  var saveTimer;
+
+  function save(key, val) { try { localStorage.setItem(key, val); } catch(e) {} }
+  function load(key) { try { return localStorage.getItem(key) || ''; } catch(e) { return ''; } }
+
+  function showToast() {
+    toast.classList.add('show');
+    clearTimeout(showToast._t);
+    showToast._t = setTimeout(function() { toast.classList.remove('show'); }, 2000);
+  }
+
+  document.querySelectorAll('.desc-field[data-key]').forEach(function(el) {
+    var key = el.dataset.key;
+    var stored = load(key);
+    if (stored) { el.textContent = stored; el.classList.remove('empty'); }
+
+    el.addEventListener('focus', function() {
+      if (el.classList.contains('empty')) el.textContent = '';
+      el.classList.remove('empty');
+    });
+    el.addEventListener('blur', function() {
+      if (!el.textContent.trim()) { el.textContent = ''; el.classList.add('empty'); }
+    });
+    el.addEventListener('input', function() {
+      clearTimeout(saveTimer);
+      saveTimer = setTimeout(function() {
+        save(key, el.textContent.trim());
+        showToast();
+      }, 600);
+    });
+  });
+}());
+</script>
+</body>
+</html>

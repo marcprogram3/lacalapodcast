@@ -1,0 +1,75 @@
+# ─── Gravacions brutes (massa pesades, ús intern) ────────────────────────────
+*.MOV
+*.mov
+*.WAV
+*.wav
+
+# ─── Scripts de construcció (ús intern) ──────────────────────────────────────
+*.py
+*.pyc
+__pycache__/
+
+# ─── Guions, fitxes i transcripcions (ús intern) ─────────────────────────────
+guio_ep*.html
+**/guio_ep*.html
+fitxa_*.html
+**/fitxa_*.html
+transcripcio*
+**/transcripcio*
+transcribir_*.txt
+**/transcribir_*.txt
+*stc87_text.txt
+tertulia*
+**/tertulia*
+
+# Fulls de càlcul (recerca interna)
+*.xls
+*.xlsx
+
+# Versions text de PDFs (internes)
+*_2025.txt
+*_2019-2023.txt
+*_2015-2019.txt
+*pressupostos_.txt
+actes_2002_2003.txt
+
+# Guions en PDF
+"EPISODI 6/Guió Ep.*.pdf"
+guio_forum_video.html
+
+# ─── Formularis de consentiment i fitxers privats ────────────────────────────
+consentiment_*.html
+**/fulla-consentiment.html
+OBSERVACIONS.docx.pdf
+**/OBSERVACIONS.docx.pdf
+
+# ─── PDFs de resum d'episodi (interns) ───────────────────────────────────────
+EPISODI 1/EPISODI 1. XAVIER DE LA FUENTE.pdf
+EPISODI 2/EPISODI 2 - ANA ARAGÓN.pdf
+EPISODI 3/EPISODI 3 - JORDI GASENI .pdf
+
+# ─── Pàgines d'anàlisi interna ────────────────────────────────────────────────
+estudi.html
+relat_politica_ametlla.html
+
+# ─── Pàgines internes d'Arxius Podcast ───────────────────────────────────────
+Arxius Podcast/index.html
+Arxius Podcast/guio_video_presentacio.html
+
+# ─── Carpeta de l'episodi 8 (pendent de gravar) ───────────────────────────────
+EPISODI 8/
+
+# ─── PDF amb nom hash (intern) ────────────────────────────────────────────────
+SwMxWWwkKzvjlkYGh4paJhNT270_*.pdf
+
+# ─── Guió tertúlia EP.06 i EP.07 (interns) ────────────────────────────────────
+EPISODI 6/Guió*.pdf
+EPISODI 6/guio_ep06*.html
+
+# ─── Configuració de Claude Code (privat) ─────────────────────────────────────
+.claude/
+
+# ─── Sistema ──────────────────────────────────────────────────────────────────
+Thumbs.db
+desktop.ini
+.DS_Store

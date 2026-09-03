@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ep.05 Preguntes — LaCalaPodcast</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Playfair+Display:ital,wght@0,700;0,800;1,700&display=swap">
+  <style>
+    :root {
+      --navy:  #082f63;
+      --blue:  #1767b1;
+      --coral: #ee735c;
+      --ink:   #11233b;
+      --muted: #62748b;
+      --paper: #f7f4ee;
+      --deep:  #eee9df;
+      --white: #fffdf9;
+      --line:  #d9d7d0;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--paper); color: var(--ink); font-family: "DM Sans", Arial, sans-serif; line-height: 1.6; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ─── Topline ─── */
+    .topline {
+      background: var(--navy); color: rgba(255,255,255,.75);
+      font: 11px "DM Mono", monospace; letter-spacing: .08em; text-transform: uppercase;
+    }
+    .topline-inner {
+      max-width: 860px; margin-inline: auto; padding: 0 24px; min-height: 34px;
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    }
+    .signal { display: inline-flex; align-items: center; gap: 8px; }
+    .signal i { width: 7px; height: 7px; border-radius: 50%; background: var(--coral); box-shadow: 0 0 0 4px rgba(238,115,92,.22); }
+    .topline strong { color: #fff; font-weight: 500; }
+
+    /* ─── Sticky nav ─── */
+    .top-nav {
+      position: sticky; top: 0; z-index: 30;
+      background: rgba(247,244,238,.95); border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(14px);
+    }
+    .top-nav-inner {
+      max-width: 860px; margin-inline: auto; padding: 0 24px; min-height: 56px;
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    }
+    .back-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      font: 600 12px "DM Sans", Arial, sans-serif; color: var(--muted); transition: color .15s;
+    }
+    .back-link:hover { color: var(--ink); }
+    .back-link svg { width: 14px; height: 14px; flex: 0 0 14px; }
+    .nav-title { font: 500 11px "DM Mono", monospace; letter-spacing: .1em; text-transform: uppercase; color: var(--coral); }
+    .q-badge {
+      font: 600 11px "DM Mono", monospace; letter-spacing: .05em;
+      background: var(--navy); color: #fff; padding: 3px 10px; border-radius: 99px;
+      white-space: nowrap;
+    }
+
+    /* ─── Page header ─── */
+    .page-header {
+      max-width: 860px; margin-inline: auto;
+      padding: 44px 24px 32px; border-bottom: 1px solid var(--line);
+    }
+    .ep-eyebrow {
+      font: 500 10px "DM Mono", monospace; letter-spacing: .14em; text-transform: uppercase;
+      color: var(--coral); margin-bottom: 12px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .ep-eyebrow::before { content: ""; width: 24px; height: 1px; background: var(--coral); }
+    .page-title {
+      font: 800 clamp(26px,4vw,38px)/1.1 "Playfair Display", Georgia, serif;
+      color: var(--navy); letter-spacing: -.03em; text-wrap: balance; margin-bottom: 6px;
+    }
+    .page-title em { font-style: italic; color: var(--blue); }
+    .page-subtitle { font: 400 14px "DM Sans", Arial, sans-serif; color: var(--muted); }
+
+    /* ─── Question list ─── */
+    .q-section {
+      max-width: 860px; margin-inline: auto; padding: 40px 24px 0;
+    }
+    .section-divider {
+      display: flex; align-items: center; gap: 12px;
+      padding: 28px 0 16px;
+    }
+    .section-divider span {
+      font: 500 10px "DM Mono", monospace; letter-spacing: .14em; text-transform: uppercase;
+      color: var(--muted); white-space: nowrap;
+    }
+    .section-divider::after {
+      content: ""; flex: 1; height: 1px; background: var(--line);
+    }
+
+    .q-item {
+      padding: 24px 0; border-bottom: 1px solid var(--line);
+      display: grid; grid-template-columns: 52px 1fr; gap: 0 16px;
+    }
+    .q-item:last-child { border-bottom: none; }
+    .q-num {
+      font: 700 12px "DM Mono", monospace; color: var(--coral);
+      padding-top: 3px; letter-spacing: .05em; text-align: right;
+    }
+    .q-item.possible .q-num { color: var(--muted); }
+    .q-body { display: flex; flex-direction: column; gap: 10px; }
+    .q-text {
+      font: 600 16.5px/1.5 "DM Sans", Arial, sans-serif; color: var(--navy);
+    }
+    .q-item.possible .q-text {
+      font-weight: 500; color: var(--ink); font-size: 15.5px;
+    }
+
+    /* Follow-up notes — hidden in public view */
+    .q-follow { display: none; }
+
+    /* ─── Footer ─── */
+    .page-footer {
+      max-width: 860px; margin-inline: auto;
+      padding: 36px 24px 60px; border-top: 1px solid var(--line);
+      margin-top: 40px;
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;
+    }
+    .footer-brand { font: 700 13px "Playfair Display", Georgia, serif; color: var(--muted); }
+    .footer-note  { font: 400 11px "DM Mono", monospace; color: var(--muted); }
+
+    @media (max-width: 600px) {
+      .page-header, .q-section { padding-left: 16px; padding-right: 16px; }
+      .top-nav-inner, .topline-inner { padding-left: 16px; padding-right: 16px; }
+      .q-item { grid-template-columns: 36px 1fr; gap: 0 10px; }
+      .q-text { font-size: 15px; }
+      .page-footer { padding: 28px 16px 48px; }
+      .nav-title { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="topline">
+  <div class="topline-inner">
+    <span class="signal"><i></i><strong>Ep. 05</strong> · Preguntes de l'entrevista</span>
+    <span>LaCalaPodcast</span>
+  </div>
+</div>
+
+<nav class="top-nav">
+  <div class="top-nav-inner">
+    <a class="back-link" href="ep5-fonts.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      Fonts de l'episodi
+    </a>
+    <span class="nav-title">El regidor dels comptes</span>
+    <span class="q-badge">11 preguntes</span>
+  </div>
+</nav>
+
+<header class="page-header">
+  <div class="ep-eyebrow">Episodi 05 · 11 Juny 2026</div>
+  <h1 class="page-title"><em>El regidor dels comptes</em> — Preguntes</h1>
+  <p class="page-subtitle">Entrevista amb <strong>Antonio Espuny</strong></p>
+</header>
+
+<div class="q-section">
+    <div class="q-item">
+      <span class="q-num">01</span>
+      <div class="q-body">
+        <p class="q-text">Portes quaranta anys vinculat a la política de l'Ametlla de Mar. Alcalde, regidor, canvis de partit, retorn. Per a algú que et veu per primera vegada: qui és l'Antonio Espuny i per quin motiu hi torna cop rere cop?</p>
+      <div class="q-follow">Trencagel. Deixa que construeixi el seu propi relat. La trajectòria llarga és el seu punt fort i el seu punt dèbil alhora — no l'interrompis.</div>
+      </div>
+    </div>
+    <div class="q-item">
+      <span class="q-num">02</span>
+      <div class="q-body">
+        <p class="q-text">En quin fet concret es manifestava la inestabilitat i el desgovern que vau utilitzar per justificar la moció de censura?</p>
+      <div class="q-follow">No acceptis generalitats. Si diu &quot;manca de diàleg&quot;: &quot;Pots citar un cas concret en què el govern de Junts va ignorar una proposta d'Entesa?&quot; Si parla d'inestabilitat: &quot;Quin fet específic — una decisió, un acord incomplert, una votació — va ser el punt de no retorn?&quot;</div>
+      </div>
+    </div>
+    <div class="q-item">
+      <span class="q-num">03</span>
+      <div class="q-body">
+        <p class="q-text">Del 2015 al 2023, mentre eres el Regidor d'Hisenda d'ERC, el ràtio d'endeutament —deute viu dividit entre ingressos corrents— va passar del 112% al 140%. Tres anys després, el govern de Junts l'ha deixat al 60,5%. Quina decisió concreta durant les legislatures 2015–2023 va portar a incrementar el ràtio del 112% al 140%?</p>
+      <div class="q-follow">Compte amb la trampa que pot fer: dir &quot;vam trobar 31 milions de deute&quot; i dividir-ho pels ingressos corrents dona un 300% — però els 31 milions eren el deute TOTAL (inclou factures a proveïdors, deute comercial i obligacions a menys d'un any), no el deute viu, que només compta el deute a llarg termini. La fórmula correcta del ràtio és deute viu/ingressos corrents. Si intenta fer-ho: &quot;Els 31 milions eren el deute total, no el deute viu. El ràtio legal es calcula sobre el deute viu. Torna a la pregunta: quina decisió va fer pujar el ràtio del 112% al 140%?&quot; Si culpa el context econòmic: &quot;El govern de Junts va tenir el mateix municipi i el va reduir del 140% al 60,5%. Quina decisió d'ERC explica la diferència?&quot;</div>
+      </div>
+    </div>
+    <div class="q-item">
+      <span class="q-num">04</span>
+      <div class="q-body">
+        <p class="q-text">El vostre pressupost preveu reduir 170.000 € en personal i 350.000 € en despesa corrent — uns 550.000 € en total — i els vostres números diuen que obtindreu un estalvi net de 108.000 €. La liquidació del 2025 va tancar amb un estalvi net d'1.066.000 €. Si afirmeu que podreu mantindre els resultats del 2025, per quin motiu el vostre propi pressupost en preveu deu vegades menys?</p>
+      <div class="q-follow">Les xifres del seu propi pressupost el contradiuen. Si diu que superaran les previsions: &quot;Però un pressupost és un compromís públic. Si creueu que podreu igualar el 2025, per quin motiu no ho heu pressupostat?&quot; Si diu que és prudència: &quot;Una prudència que suposa pressupostar 958.000 € menys d'estalvi que l'any anterior no és prudència — és reconèixer que la situació empitjorarà.&quot;</div>
+      </div>
+    </div>
+    <div class="q-item">
+      <span class="q-num">05</span>
+      <div class="q-body">
+        <p class="q-text">L'informe d'Intervenció diu que el pressupost que heu presentat és essencialment el mateix que es va enviar a Madrid, amb les esmenes del Ministeri. Si el pressupost del govern anterior estava tant malament com manifestàveu, quines modificacions concretes heu introduït més enllà de les esmenes del Ministeri? I per quin motiu l'oposició no us l'ha votat a favor?</p>
+      <div class="q-follow">Si diu que hi ha canvis substancials: &quot;L'informe d'Intervenció els contradiu — diu que és el mateix document. Quins canvis concrets no estan recollits en aquell informe?&quot; Si diu que l'oposició vota per ideologia: &quot;Però si el pressupost és bo per al municipi, per quin motiu no han pogut convèncer ni un sol regidor de l'oposició?&quot;</div>
+      </div>
+    </div>
+    <div class="q-item">
+      <span class="q-num">06</span>
+      <div class="q-body">
+        <p class="q-text">Del 2015 al 2023, quines actuacions concretes i verificables va dur a terme el govern d'ERC per cobrar el 1.300.000 € del PAU Sant Jordi? I per quin motiu no es va poder cobrar fins al 2025, ja sota el govern de Junts?</p>
+      <div class="q-follow">Si diu que s'estava gestionant: &quot;Quines gestions concretes i documentades es van fer durant vuit anys? Hi ha cap escrit, requeriment o acció judicial del vostre govern per cobrar-ho?&quot; Si culpa el promotor: &quot;El promotor no paga fins que algú l'obliga. Per quin motiu el govern d'ERC no va fer les gestions necessàries durant vuit anys per obligar-lo?&quot;</div>
+      </div>
+    </div>
+    <div class="q-item">
+      <span class="q-num">07</span>
+      <div class="q-body">
+        <p class="q-text">En quin criteri et bases per prometre 460.000 € de les dues parcel·les taxades en 255.000 € pels arquitectes municipals?</p>
+      <div class="q-follow">Tres xifres incompatibles: 255.000 € (taxació tècnica), 460.000 € (promesa d'Espuny), 165.000 € (millor oferta a la subhasta de les onze parcel·les restants). Si explica els seus criteris: &quot;Però els arquitectes municipals han taxat les mateixes parcel·les en 255.000 €. En quin punt la valoració tècnica és incorrecta?&quot; Si apel·la a la millora del mercat: &quot;El mercat ja ha parlat — la millor oferta per les onze parcel·les restants ha estat de 165.000 €.&quot;</div>
+      </div>
+    </div>
+    <div class="q-item">
+      <span class="q-num">08</span>
+      <div class="q-body">
+        <p class="q-text">Renuncieu al Centre Cívic — l'Auditori?</p>
+      <div class="q-follow">Si diu que és una postposició: &quot;Fins quan? Hi ha una data compromesa i una partida reservada?&quot; Si diu que s'ha cancel·lat: &quot;Els veïns que esperaven aquest equipament des de fa anys, com s'ho han d'entendre?&quot;</div>
+      </div>
+    </div>
+    <div class="q-item">
+      <span class="q-num">09</span>
+      <div class="q-body">
+        <p class="q-text">Si segons Xavier De la Fuente i Jordi Gaseni el SUM segueix funcionant igual que sempre, com s'explica que a la passada Diada dels Fideus només funcionés 6 hores?</p>
+      <div class="q-follow">Incident concret i documentat. Si ho nega: &quot;Tenim documentat que el servei va quedar inoperatiu durant hores en una diada d'alta afluència. Qui n'és el responsable?&quot; Si ho admet: &quot;Per quin motiu no hi va haver cap comunicat oficial explicant-ho als veïns?&quot;</div>
+      </div>
+    </div>
+    <div class="q-item">
+      <span class="q-num">10</span>
+      <div class="q-body">
+        <p class="q-text">Al nostre podcast, li vam preguntar a Jordi Gaseni quin benefici té la població de l'Ametlla de Mar, a part de la localització, de tenir l'Onada al municipi. Ell va respondre: &quot;patrimoni.&quot; És a dir, la moció de censura es va justificar, en part, perquè el govern de Junts havia venut patrimoni del poble — el terreny de la residència d'avis. Però quan tu eres alcalde, el setembre del 2002, vas adjudicar finques patrimonials municipals a Marina Sant Jordi SL per 1.382.327 €. Com s'explica que el govern que critiques per vendre patrimoni estigui liderat per algú que, quan va tenir el poder, va fer exactament el mateix?</p>
+      <div class="q-follow">Si diu que eren situacions diferents: &quot;Explica la diferència concreta. En ambdós casos l'Ajuntament venia patrimoni per finançar despeses. Quin és el criteri que fa una venda acceptable i l'altra no?&quot; Si defensa la venda del 2002: &quot;Llavors per quin motiu la venda de la residència d'avis era tan inacceptable que justificava una moció de censura?&quot; Si esquiva: &quot;Gaseni va dir 'patrimoni' en un mot. Tu vas vendre patrimoni. Com ho concilia?&quot; → Repregunta sobre el deute: &quot;A més, Marina Sant Jordi — l'empresa a qui vas adjudicar aquelles finques el 2002 — és la mateixa que ara té un deute pendent de 7 milions amb l'Ajuntament. Quin és el fil que connecta aquella adjudicació amb el deute d'avui?&quot;</div>
+      </div>
+    </div>
+    <div class="q-item">
+      <span class="q-num">11</span>
+      <div class="q-body">
+        <p class="q-text">De cara a les properes eleccions, et presentaràs? I si és que sí, quins canvis concrets tens pensats fer per al municipi?</p>
+      <div class="q-follow">Tancament amb projecció. Si diu que sí: que concretin — no valen generalitats. Si diu que no ho sap: &quot;Però amb quaranta anys de trajectòria, hi ha alguna cosa que no has pogut fer i que encara voldries fer?&quot;</div>
+      </div>
+    </div>
+
+</div>
+
+<footer class="page-footer">
+  <span class="footer-brand">LaCalaPodcast</span>
+  <span class="footer-note">Preguntes preparades per a l'entrevista · Ús intern</span>
+</footer>
+
+</body>
+</html>

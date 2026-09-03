@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ep.03 Preguntes — LaCalaPodcast</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Playfair+Display:ital,wght@0,700;0,800;1,700&display=swap">
+  <style>
+    :root {
+      --navy:  #082f63;
+      --blue:  #1767b1;
+      --coral: #ee735c;
+      --ink:   #11233b;
+      --muted: #62748b;
+      --paper: #f7f4ee;
+      --deep:  #eee9df;
+      --white: #fffdf9;
+      --line:  #d9d7d0;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--paper); color: var(--ink); font-family: "DM Sans", Arial, sans-serif; line-height: 1.6; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ─── Topline ─── */
+    .topline {
+      background: var(--navy); color: rgba(255,255,255,.75);
+      font: 11px "DM Mono", monospace; letter-spacing: .08em; text-transform: uppercase;
+    }
+    .topline-inner {
+      max-width: 860px; margin-inline: auto; padding: 0 24px; min-height: 34px;
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    }
+    .signal { display: inline-flex; align-items: center; gap: 8px; }
+    .signal i { width: 7px; height: 7px; border-radius: 50%; background: var(--coral); box-shadow: 0 0 0 4px rgba(238,115,92,.22); }
+    .topline strong { color: #fff; font-weight: 500; }
+
+    /* ─── Sticky nav ─── */
+    .top-nav {
+      position: sticky; top: 0; z-index: 30;
+      background: rgba(247,244,238,.95); border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(14px);
+    }
+    .top-nav-inner {
+      max-width: 860px; margin-inline: auto; padding: 0 24px; min-height: 56px;
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    }
+    .back-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      font: 600 12px "DM Sans", Arial, sans-serif; color: var(--muted); transition: color .15s;
+    }
+    .back-link:hover { color: var(--ink); }
+    .back-link svg { width: 14px; height: 14px; flex: 0 0 14px; }
+    .nav-title { font: 500 11px "DM Mono", monospace; letter-spacing: .1em; text-transform: uppercase; color: var(--coral); }
+    .q-badge {
+      font: 600 11px "DM Mono", monospace; letter-spacing: .05em;
+      background: var(--navy); color: #fff; padding: 3px 10px; border-radius: 99px;
+      white-space: nowrap;
+    }
+
+    /* ─── Page header ─── */
+    .page-header {
+      max-width: 860px; margin-inline: auto;
+      padding: 44px 24px 32px; border-bottom: 1px solid var(--line);
+    }
+    .ep-eyebrow {
+      font: 500 10px "DM Mono", monospace; letter-spacing: .14em; text-transform: uppercase;
+      color: var(--coral); margin-bottom: 12px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .ep-eyebrow::before { content: ""; width: 24px; height: 1px; background: var(--coral); }
+    .page-title {
+      font: 800 clamp(26px,4vw,38px)/1.1 "Playfair Display", Georgia, serif;
+      color: var(--navy); letter-spacing: -.03em; text-wrap: balance; margin-bottom: 6px;
+    }
+    .page-title em { font-style: italic; color: var(--blue); }
+    .page-subtitle { font: 400 14px "DM Sans", Arial, sans-serif; color: var(--muted); }
+
+    /* ─── Question list ─── */
+    .q-section {
+      max-width: 860px; margin-inline: auto; padding: 40px 24px 0;
+    }
+    .section-divider {
+      display: flex; align-items: center; gap: 12px;
+      padding: 28px 0 16px;
+    }
+    .section-divider span {
+      font: 500 10px "DM Mono", monospace; letter-spacing: .14em; text-transform: uppercase;
+      color: var(--muted); white-space: nowrap;
+    }
+    .section-divider::after {
+      content: ""; flex: 1; height: 1px; background: var(--line);
+    }
+
+    .q-item {
+      padding: 24px 0; border-bottom: 1px solid var(--line);
+      display: grid; grid-template-columns: 52px 1fr; gap: 0 16px;
+    }
+    .q-item:last-child { border-bottom: none; }
+    .q-num {
+      font: 700 12px "DM Mono", monospace; color: var(--coral);
+      padding-top: 3px; letter-spacing: .05em; text-align: right;
+    }
+    .q-item.possible .q-num { color: var(--muted); }
+    .q-body { display: flex; flex-direction: column; gap: 10px; }
+    .q-text {
+      font: 600 16.5px/1.5 "DM Sans", Arial, sans-serif; color: var(--navy);
+    }
+    .q-item.possible .q-text {
+      font-weight: 500; color: var(--ink); font-size: 15.5px;
+    }
+
+    /* Follow-up notes — hidden in public view */
+    .q-follow { display: none; }
+
+    /* ─── Footer ─── */
+    .page-footer {
+      max-width: 860px; margin-inline: auto;
+      padding: 36px 24px 60px; border-top: 1px solid var(--line);
+      margin-top: 40px;
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;
+    }
+    .footer-brand { font: 700 13px "Playfair Display", Georgia, serif; color: var(--muted); }
+    .footer-note  { font: 400 11px "DM Mono", monospace; color: var(--muted); }
+
+    @media (max-width: 600px) {
+      .page-header, .q-section { padding-left: 16px; padding-right: 16px; }
+      .top-nav-inner, .topline-inner { padding-left: 16px; padding-right: 16px; }
+      .q-item { grid-template-columns: 36px 1fr; gap: 0 10px; }
+      .q-text { font-size: 15px; }
+      .page-footer { padding: 28px 16px 48px; }
+      .nav-title { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="topline">
+  <div class="topline-inner">
+    <span class="signal"><i></i><strong>Ep. 03</strong> · Preguntes de l'entrevista</span>
+    <span>LaCalaPodcast</span>
+  </div>
+</div>
+
+<nav class="top-nav">
+  <div class="top-nav-inner">
+    <a class="back-link" href="ep3-fonts.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      Fonts de l'episodi
+    </a>
+    <span class="nav-title">El retorn a l'alcaldia</span>
+    <span class="q-badge">11 preguntes</span>
+  </div>
+</nav>
+
+<header class="page-header">
+  <div class="ep-eyebrow">Episodi 03 · 4 Juny 2026</div>
+  <h1 class="page-title"><em>El retorn a l'alcaldia</em> — Preguntes</h1>
+  <p class="page-subtitle">Entrevista amb <strong>Jordi Gaseni</strong></p>
+</header>
+
+<div class="q-section">
+    <div class="q-item">
+      <span class="q-num">01</span>
+      <div class="q-body">
+        <p class="q-text">Vas estar 8 anys com a alcalde de l'Ametlla de Mar. Per a algú que no et coneix, com vas arribar fins aquí?</p>
+      <div class="q-follow">Trencagel. Que expliqui la seva trajectòria política des del principi. Permet que estableixi el seu propi relat abans d'entrar en la crisi.</div>
+      </div>
+    </div>
+    <div class="q-item">
+      <span class="q-num">02</span>
+      <div class="q-body">
+        <p class="q-text">Al ple del maig de l'any passat, des de l'oposició, vas preguntar si el govern acabaria la legislatura. Ana Aragón declara que vas rebre una trucada de Xavier De la Fuente criticant els socis de govern. És cert?</p>
+      <div class="q-follow">Pregunta clau per saber quan va començar realment la moció. Si De la Fuente va trucar a l'oposició criticant Junts, això implica que el canvi de bàndol es va gestar molt abans del que s'ha dit públicament. Si esquiva: &quot;Però la trucada és un fet que Ana Aragón confirma. Pots desmentir-la?&quot;</div>
+      </div>
+    </div>
+    <div class="q-item">
+      <span class="q-num">03</span>
+      <div class="q-body">
+        <p class="q-text">Quan es va fer la moció, exactament? Aragón diu que es preparava des del desembre del 2025. De la Fuente diu que no estava planejat. Quina és la teva versió?</p>
+      <div class="q-follow">La cronologia és el punt de pressió. Qui diu la veritat? Si la moció es preparava des del desembre, per quin motiu es va esperar fins a l'abril? I qui va posar-se en contacte amb qui primer?</div>
+      </div>
+    </div>
+    <div class="q-item">
+      <span class="q-num">04</span>
+      <div class="q-body">
+        <p class="q-text">Quina situació et vas trobar quan vas entrar a l'ajuntament després de la moció?</p>
+      <div class="q-follow">Pregunta oberta i molt reveladora. Que descrigui l'estat real de l'administració: deutes, projectes parats, personal, contractes vigents. Si és vaga: &quot;Pots posar exemples concrets de coses que et vas trobar i que no esperaves?&quot;</div>
+      </div>
+    </div>
+    <div class="q-item">
+      <span class="q-num">05</span>
+      <div class="q-body">
+        <p class="q-text">Ana Aragón declara al nostre podcast que Eva del Amo et va trucar directament per dir-te que no compliria el pacte de relleu en l'alcaldia amb Xavier De la Fuente. Vas rebre aquesta trucada?</p>
+      <div class="q-follow">Si ho confirma: &quot;Qui va posar-se en contacte amb qui primer? Vas esperar que Del Amo et digués que no cediria l'alcaldia per decidir tirar la moció?&quot; Si ho nega: &quot;Però és Aragón qui ho afirma amb detall. Per quin motiu amagaria una trucada que l'incriminaria a ella mateixa?&quot;</div>
+      </div>
+    </div>
+    <div class="q-item">
+      <span class="q-num">06</span>
+      <div class="q-body">
+        <p class="q-text">Al ple del 27 de març de 2025, tu —des de l'oposició— vas exigir explicacions al govern de PSC i Junts perquè el pressupost del 2025 no incloïa cap projecte d'asfaltatge per a les Tres Cales. Vas recordar que el teu govern havia renovat 4 quilòmetres de camins en quatre anys i vas al·ludir a la preocupació de l'associació de veïns Mestral XXI per la manca d'inversió. L'alcaldessa Del Amo et va respondre que l'execució no es faria &quot;fins l'any que ve&quot;. Ara governes tu, i el pressupost vigent ha eliminat l'asfaltatge de camins i la construcció de l'auditori. Com s'explica que el que exigies des de l'oposició sigui el primer que retallas quan arribes al poder?</p>
+      <div class="q-follow">La teva pròpia intervenció a l'acta del ple és la trampa. Si diu que no hi ha diners: &quot;Però tu ho sabies quan ho exigies — per quin motiu ho demanaves si era inviable?&quot; Si diu que eren projectes del govern anterior: &quot;La inversió en camins la reclamaves en nom dels veïns, no en nom del govern anterior. Els veïns de Mestral XXI, que estaven molt preocupats, com ho han d'entendre ara?&quot;</div>
+      </div>
+    </div>
+    <div class="q-item">
+      <span class="q-num">07</span>
+      <div class="q-body">
+        <p class="q-text">Els arquitectes municipals han taxat dues parcel·les controvertides —situades al costat de la via del tren— en 255.000 €. El regidor Espuny ha afirmat públicament que se n'obtindran 460.000 €. Però en la subhasta de les onze parcel·les restants la millor oferta rebuda ha estat de 165.000 €. Com s'explica aquesta diferència entre el que diu el tècnic, el que promet el polític i el que ofereix el mercat?</p>
+      <div class="q-follow">Tres xifres molt distants entre si. No deixis que respongui només una. Si justifica els 460.000 €: &quot;Però el mercat ja ha parlat — ni la parcel·la a primera línia de mar ha arribat als 165.000 €. En quin criteri es basa Espuny per prometre gairebé el triple del que valoren els arquitectes?&quot;</div>
+      </div>
+    </div>
+    <div class="q-item">
+      <span class="q-num">08</span>
+      <div class="q-body">
+        <p class="q-text">El municipi arrossega un deute de gairebé 7 milions d'euros fruit d'un conveni urbanístic amb el promotor Marina Sant Jordi signat cap al 2010. L'ajuntament va perdre en primera instància, va guanyar al TSJ, i els interessos acumulats durant anys de litigi han enfilat els 3,9 milions originals fins als 6,9. La sentència que el fa exigible és del 2020. Cinc anys després, qui paga aquest deute i com?</p>
+      <div class="q-follow">Si desvia la responsabilitat al govern anterior: &quot;Però la sentència és del 2020 i ara ets tu l'alcalde. Tens un pla concret per cobrar-lo o saldar-lo?&quot; Si diu que el promotor pagarà: &quot;Porta 5 anys sense pagar. Per quin motiu ho farà ara?&quot;</div>
+      </div>
+    </div>
+    <div class="q-item">
+      <span class="q-num">09</span>
+      <div class="q-body">
+        <p class="q-text">L'Audiència Provincial de Tarragona ha condemnat l'ajuntament a pagar 199.000 € més uns 50.000 € d'interessos. Per llei, aquesta quantitat s'ha d'incorporar obligatòriament al pressupost. Ja s'ha fet? I si no, quan?</p>
+      <div class="q-follow">Si diu que ja està incorporat: bé. Si no: &quot;La llei no deixa marge — és d'obligada incorporació. Per quin motiu no s'ha fet?&quot;</div>
+      </div>
+    </div>
+    <div class="q-item">
+      <span class="q-num">10</span>
+      <div class="q-body">
+        <p class="q-text">El pressupost actual compta amb uns 200.000 € provinents de tributs de l'Estat que Hisenda i la pròpia Intervenció municipal han declarat indisponibles — perquè depenen d'uns pressupostos de l'Estat que no s'aproven des de fa tres anys. Malgrat això, el govern els ha comptabilitzat com a ingressos. Si els pressupostos de l'Estat no s'aproven, l'ajuntament haurà gastat diners que no té. Qui és el responsable d'aquesta decisió i com es cobrirà el dèficit que generaria?</p>
+      <div class="q-follow">Si diu que eren del govern anterior: &quot;Però el pressupost vigent és responsabilitat del govern actual. Has detectat el problema i quin és el teu pla?&quot; Si minimitza: &quot;La Intervenció municipal —que és independent— ja els havia declarat indisponibles. Ignorar l'advertència d'Intervenció és una decisió política molt greu.&quot;</div>
+      </div>
+    </div>
+    <div class="q-item">
+      <span class="q-num">11</span>
+      <div class="q-body">
+        <p class="q-text">Ets senador a Madrid i alcalde de l'Ametlla de Mar al mateix temps. Creus que això afecta la proximitat amb la gent del poble?</p>
+      <div class="q-follow">Pregunta directa i personal. Quants dies a la setmana és al poble? Com es gestiona l'alcaldia a distància? Si és defensiu: &quot;Però els veïns necessiten un alcalde accessible. Com t'hi trobes?&quot;</div>
+      </div>
+    </div>
+
+</div>
+
+<footer class="page-footer">
+  <span class="footer-brand">LaCalaPodcast</span>
+  <span class="footer-note">Preguntes preparades per a l'entrevista · Ús intern</span>
+</footer>
+
+</body>
+</html>

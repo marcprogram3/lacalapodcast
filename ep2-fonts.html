@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ep.2 Fonts — LaCalaPodcast</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Playfair+Display:ital,wght@0,700;0,800;1,700&display=swap">
+  <style>
+    :root {
+      --navy:   #082f63;
+      --blue:   #1767b1;
+      --sky:    #8bc4e9;
+      --coral:  #ee735c;
+      --ink:    #11233b;
+      --muted:  #62748b;
+      --paper:  #f7f4ee;
+      --deep:   #eee9df;
+      --white:  #fffdf9;
+      --line:   #d9d7d0;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: "DM Sans", Arial, sans-serif;
+      line-height: 1.6;
+    }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; cursor: pointer; }
+
+    /* ── Topline ──────────────────────────────────── */
+    .topline {
+      background: var(--navy);
+      color: rgba(255,255,255,.8);
+      font: 11px "DM Mono", monospace;
+      letter-spacing: .08em; text-transform: uppercase;
+    }
+    .topline-inner {
+      max-width: 960px; margin-inline: auto;
+      padding: 0 24px; min-height: 34px;
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    }
+    .signal { display: inline-flex; align-items: center; gap: 8px; }
+    .signal i {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--coral); box-shadow: 0 0 0 4px rgba(238,115,92,.22);
+    }
+    .topline strong { color: #fff; font-weight: 500; }
+
+    /* ── Nav sticky ───────────────────────────────── */
+    .top-nav {
+      position: sticky; top: 0; z-index: 30;
+      background: rgba(247,244,238,.92);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(12px);
+    }
+    .top-nav-inner {
+      max-width: 960px; margin-inline: auto;
+      padding: 0 24px; min-height: 58px;
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    }
+    .back-link {
+      display: inline-flex; align-items: center; gap: 7px;
+      font: 600 12px "DM Sans", Arial, sans-serif;
+      color: var(--muted); transition: color .15s;
+    }
+    .back-link:hover { color: var(--ink); }
+    .back-link svg { width: 15px; height: 15px; }
+    .nav-ep {
+      font: 500 11px "DM Mono", monospace;
+      letter-spacing: .1em; text-transform: uppercase;
+      color: var(--coral);
+    }
+    .saved-toast { display: none; }
+
+    /* ── Page header ──────────────────────────────── */
+    .page-header {
+      max-width: 960px; margin-inline: auto;
+      padding: 44px 24px 30px;
+      border-bottom: 1px solid var(--line);
+    }
+    .ep-eyebrow {
+      font: 500 10px "DM Mono", monospace;
+      letter-spacing: .14em; text-transform: uppercase;
+      color: var(--coral); margin-bottom: 10px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .ep-eyebrow::before { content: ""; width: 24px; height: 1px; background: var(--coral); }
+    .page-title {
+      font: 800 clamp(28px, 4vw, 42px)/1.08 "Playfair Display", Georgia, serif;
+      color: var(--navy); letter-spacing: -.03em;
+      text-wrap: balance; margin-bottom: 14px;
+    }
+    .page-title em { font-style: italic; color: var(--blue); }
+    .page-meta {
+      display: flex; flex-wrap: wrap; gap: 6px 18px;
+      font: 400 11px "DM Mono", monospace; color: var(--muted);
+    }
+    .page-meta span { display: inline-flex; align-items: center; gap: 5px; }
+
+    /* ── Edit hint ────────────────────────────────── */
+    .edit-hint {
+      max-width: 960px; margin-inline: auto;
+      padding: 9px 24px;
+      display: flex; align-items: center; gap: 8px;
+      font: 400 11px "DM Mono", monospace; color: var(--muted);
+      background: var(--white); border-bottom: 1px solid var(--line);
+    }
+    .edit-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--coral); flex-shrink: 0; }
+
+    /* ── Contingut principal ──────────────────────── */
+    .main-wrap { max-width: 960px; margin-inline: auto; padding: 0 24px; }
+
+    .doc-block { padding: 40px 0 0; }
+    .doc-block + .doc-block {
+      border-top: 1px solid var(--line);
+      margin-top: 44px;
+    }
+
+    /* Capçalera del doc */
+    .doc-header {
+      display: flex; align-items: flex-start; gap: 14px;
+      margin-bottom: 20px;
+    }
+    .doc-icon {
+      width: 44px; height: 44px; flex-shrink: 0;
+      border-radius: 8px;
+      display: grid; place-items: center; font-size: 22px;
+    }
+    .doc-icon.article { background: rgba(23,103,177,.1); }
+
+    .doc-header-text { flex: 1; }
+    .doc-type-badge {
+      display: inline-block;
+      font: 600 9px "DM Mono", monospace;
+      letter-spacing: .13em; text-transform: uppercase;
+      background: rgba(8,47,99,.07); color: var(--blue);
+      padding: 2px 7px; border-radius: 3px; margin-bottom: 5px;
+    }
+    .doc-name {
+      font: 700 19px/1.2 "DM Sans", Arial, sans-serif;
+      color: var(--navy); margin-bottom: 3px;
+    }
+    .doc-source {
+      font: 400 11px "DM Mono", monospace; color: var(--muted);
+    }
+
+    /* Descripció editable (estil callout) */
+    .desc-field {
+      display: block; width: 100%;
+      min-height: 52px;
+      padding: 14px 18px 14px 22px;
+      background: var(--deep);
+      border: none;
+      border-left: 3px solid var(--coral);
+      border-radius: 0 4px 4px 0;
+      font: 400 15px/1.7 "DM Sans", Arial, sans-serif;
+      color: var(--ink); outline: none;
+      white-space: pre-wrap;
+      transition: border-left-color .2s, background .2s;
+      margin-bottom: 20px;
+    }
+    .desc-field:focus {
+      border-left-color: var(--blue);
+      background: rgba(23,103,177,.06);
+    }
+    .desc-field.empty::before {
+      content: attr(data-placeholder);
+      color: var(--muted); font-style: italic;
+      pointer-events: none;
+    }
+    .desc-field.empty:focus::before { display: none; }
+
+    /* Targeta d'article */
+    .article-card {
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      overflow: hidden;
+      background: var(--white);
+    }
+    .article-card-body {
+      padding: 24px 26px 20px;
+    }
+    .article-source-row {
+      display: flex; align-items: center; gap: 10px;
+      margin-bottom: 14px;
+    }
+    .article-source-badge {
+      font: 700 10px "DM Mono", monospace;
+      letter-spacing: .1em; text-transform: uppercase;
+      background: var(--navy); color: #fff;
+      padding: 3px 9px; border-radius: 3px;
+    }
+    .article-date {
+      font: 400 11px "DM Mono", monospace;
+      color: var(--muted);
+    }
+    .article-headline {
+      font: 700 20px/1.28 "Playfair Display", Georgia, serif;
+      color: var(--navy); letter-spacing: -.02em;
+      text-wrap: balance; margin-bottom: 12px;
+    }
+    .article-excerpt {
+      font: 400 14px/1.65 "DM Sans", Arial, sans-serif;
+      color: var(--muted);
+      max-width: 72ch;
+    }
+    .article-card-footer {
+      border-top: 1px solid var(--line);
+      padding: 13px 26px;
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      background: var(--paper);
+    }
+    .article-url {
+      font: 400 11px "DM Mono", monospace;
+      color: var(--muted);
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    }
+    .read-btn {
+      display: inline-flex; align-items: center; gap: 7px;
+      background: var(--navy); color: #fff;
+      font: 600 12px "DM Sans", Arial, sans-serif;
+      padding: 9px 16px; border-radius: 4px;
+      border: none; cursor: pointer;
+      transition: background .15s; white-space: nowrap;
+      text-decoration: none; flex-shrink: 0;
+    }
+    .read-btn:hover { background: #0f3d7a; }
+    .read-btn svg { width: 13px; height: 13px; }
+
+    /* ── Footer ───────────────────────────────────── */
+    .page-footer {
+      max-width: 960px; margin-inline: auto;
+      padding: 40px 24px 64px;
+      border-top: 1px solid var(--line); margin-top: 52px;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 20px; flex-wrap: wrap;
+    }
+    .footer-brand { font: 700 14px "Playfair Display", Georgia, serif; color: var(--muted); }
+    .footer-note  { font: 400 11px "DM Mono", monospace; color: var(--muted); }
+
+    /* ── Responsive ───────────────────────────────── */
+    @media (max-width: 600px) {
+      .page-header, .main-wrap { padding-left: 16px; padding-right: 16px; }
+      .top-nav-inner, .topline-inner, .edit-hint { padding-left: 16px; padding-right: 16px; }
+      .article-card-body { padding: 18px 18px 16px; }
+      .article-card-footer { flex-direction: column; align-items: flex-start; padding: 12px 18px; }
+      .article-url { display: none; }
+      .page-footer { padding: 32px 16px 48px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Topline -->
+<div class="topline">
+  <div class="topline-inner">
+    <span class="signal"><i></i><strong>Ep. 02</strong> · Fonts i documents</span>
+    <span>LaCalaPodcast · L'Ametlla de Mar</span>
+  </div>
+</div>
+
+<!-- Nav sticky -->
+<nav class="top-nav">
+  <div class="top-nav-inner">
+    <a class="back-link" href="lacalapodcast-forum.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      Tornar al Fòrum
+    </a>
+    <span class="nav-ep">La regidora que va dir "NO"</span>
+    <span class="saved-toast" id="saved-toast" aria-live="polite">✓ Guardat</span>
+  </div>
+</nav>
+
+<!-- Capçalera -->
+<header class="page-header">
+  <div class="ep-eyebrow">Episodi 02 · 1 Juny 2026</div>
+  <h1 class="page-title"><em>La regidora que va dir "NO"</em> — Fonts</h1>
+  <div class="page-meta">
+    <span>
+      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z"/><path d="M4 9h16"/><path d="M9 9v11"/></svg>
+      2 articles de premsa
+    </span>
+  </div>
+  <a href="ep2-preguntes.html" style="display:inline-flex;align-items:center;gap:6px;margin-top:16px;font:600 12px 'DM Sans',Arial,sans-serif;color:var(--blue);text-decoration:none;">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    Veure preguntes de l'entrevista →
+  </a>
+</header>
+
+<!-- ═══════════════════════════════════════════════ -->
+<div class="main-wrap">
+
+  <!-- Article 1: Canal TE -->
+  <div class="doc-block" id="article-canalte">
+    <div class="doc-header">
+      <div class="doc-icon article">📰</div>
+      <div class="doc-header-text">
+        <span class="doc-type-badge">Article de premsa</span>
+        <div class="doc-name">Canal TE · 8 d'abril de 2026</div>
+        <div class="doc-source">Canal Terres de l'Ebre</div>
+      </div>
+    </div>
+
+    <div class="article-card">
+      <div class="article-card-body">
+        <div class="article-source-row">
+          <span class="article-source-badge">Canal TE</span>
+          <span class="article-date">8 d'abril de 2026</span>
+        </div>
+        <h2 class="article-headline">Ana Aragón deixa el PSC però manté l'acta de regidora a l'Ametlla de Mar</h2>
+        <p class="article-excerpt">La regidora de l'Ametlla de Mar abandona la militància del PSC denunciant pràctiques de micromasclisme i falta de suport intern. Aragón mantindrà l'acta de regidora com a no adscrita en un context polític convuls marcat per la presentació d'una moció de censura.</p>
+      </div>
+      <div class="article-card-footer">
+        <span class="article-url">canalte.cat/actualitat/politica/ana-aragon-deixa-el-psc…</span>
+        <a class="read-btn" href="https://canalte.cat/actualitat/politica/ana-aragon-deixa-el-psc-pero-mante-lacta-de-regidora-a-lametlla-de-mar/" target="_blank" rel="noopener">
+          Llegir l'article
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Article 2: Diari de Tarragona -->
+  <div class="doc-block" id="article-ddt">
+    <div class="doc-header">
+      <div class="doc-icon article">📰</div>
+      <div class="doc-header-text">
+        <span class="doc-type-badge">Article de premsa</span>
+        <div class="doc-name">Diari de Tarragona · 28 de març de 2026</div>
+        <div class="doc-source">Diari de Tarragona · Agència Catalana de Notícies</div>
+      </div>
+    </div>
+
+    <div class="article-card">
+      <div class="article-card-body">
+        <div class="article-source-row">
+          <span class="article-source-badge">Diari de Tarragona</span>
+          <span class="article-date">28 de març de 2026</span>
+        </div>
+        <h2 class="article-headline">El PSC de L'Ametlla de Mar acusa la regidora Ana Aragón de tránsfuga</h2>
+        <p class="article-excerpt">El PSC de L'Ametlla de Mar qualifica la seva regidora Ana Aragón de tránsfuga per negar-se a complir el pacte de govern amb Junts. El partit adverteix que qualsevol acord amb Junts manca de representativitat i amenaça d'abandonar el govern local.</p>
+      </div>
+      <div class="article-card-footer">
+        <span class="article-url">diaridetarragona.com/ebre/255887/psc-l-ametlla-mar-acusa…</span>
+        <a class="read-btn" href="https://www.diaridetarragona.com/ebre/255887/psc-l-ametlla-mar-acusa-regidora-ana-aragon-transfuga.html" target="_blank" rel="noopener">
+          Llegir l'article
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /main-wrap -->
+
+<!-- Footer -->
+<footer class="page-footer">
+  <span class="footer-brand">LaCalaPodcast</span>
+  <span class="footer-note">Les descripcions es desen localment al navegador.</span>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+  var toast = document.getElementById('saved-toast');
+  var saveTimer;
+
+  function save(key, val) { try { localStorage.setItem(key, val); } catch(e) {} }
+  function load(key) { try { return localStorage.getItem(key) || ''; } catch(e) { return ''; } }
+
+  function showToast() {
+    toast.classList.add('show');
+    clearTimeout(showToast._t);
+    showToast._t = setTimeout(function() { toast.classList.remove('show'); }, 2000);
+  }
+
+  document.querySelectorAll('.desc-field[data-key]').forEach(function(el) {
+    var key = el.dataset.key;
+    var stored = load(key);
+    if (stored) { el.textContent = stored; el.classList.remove('empty'); }
+
+    el.addEventListener('focus', function() {
+      if (el.classList.contains('empty')) el.textContent = '';
+      el.classList.remove('empty');
+    });
+    el.addEventListener('blur', function() {
+      if (!el.textContent.trim()) { el.textContent = ''; el.classList.add('empty'); }
+    });
+    el.addEventListener('input', function() {
+      clearTimeout(saveTimer);
+      saveTimer = setTimeout(function() {
+        save(key, el.textContent.trim());
+        showToast();
+      }, 600);
+    });
+  });
+}());
+</script>
+</body>
+</html>
