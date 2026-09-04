@@ -1,5 +1,2 @@
-*.mp4 filter=lfs diff=lfs merge=lfs -text
-
-# Clips curts — exclosos de LFS (noms únics al repo)
-gaseniSUM.mp4 filter= diff= merge= -text
-espunyratio.mp4 filter= diff= merge= -text
+# Únicament el tràiler (411 MB) va a LFS
+Tràiler*.mp4 filter=lfs diff=lfs merge=lfs -text
