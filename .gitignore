@@ -56,8 +56,16 @@ relat_politica_ametlla.html
 Arxius Podcast/index.html
 Arxius Podcast/guio_video_presentacio.html
 
-# ─── Carpeta de l'episodi 8 (pendent de gravar) ───────────────────────────────
-EPISODI 8/
+# ─── Carpeta de l'episodi 8 (ignora tot excepte portada i PDFs publicats) ──────
+EPISODI 8/**
+!EPISODI 8/Portada conclusions .jpg
+!EPISODI 8/Documentació rellevant/
+!EPISODI 8/Documentació rellevant/*/
+!EPISODI 8/Documentació rellevant/Limitacions/*/
+!EPISODI 8/Documentació rellevant/*/publicar/
+!EPISODI 8/Documentació rellevant/Limitacions/*/publicar/
+!EPISODI 8/Documentació rellevant/*/publicar/*.pdf
+!EPISODI 8/Documentació rellevant/Limitacions/*/publicar/*.pdf
 
 # ─── PDF amb nom hash (intern) ────────────────────────────────────────────────
 SwMxWWwkKzvjlkYGh4paJhNT270_*.pdf
