@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ep.8 Fonts — LaCalaPodcast</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Playfair+Display:ital,wght@0,700;0,800;1,700&display=swap">
+  <style>
+    :root {
+      --navy:   #082f63;
+      --blue:   #1767b1;
+      --sky:    #8bc4e9;
+      --coral:  #ee735c;
+      --ink:    #11233b;
+      --muted:  #62748b;
+      --paper:  #f7f4ee;
+      --deep:   #eee9df;
+      --white:  #fffdf9;
+      --line:   #d9d7d0;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--paper); color: var(--ink); font-family: "DM Sans", Arial, sans-serif; line-height: 1.6; }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; cursor: pointer; }
+
+    .topline { background: var(--navy); color: rgba(255,255,255,.8); font: 11px "DM Mono", monospace; letter-spacing: .08em; text-transform: uppercase; }
+    .topline-inner { max-width: 960px; margin-inline: auto; padding: 0 24px; min-height: 34px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    .signal { display: inline-flex; align-items: center; gap: 8px; }
+    .signal i { width: 7px; height: 7px; border-radius: 50%; background: var(--coral); box-shadow: 0 0 0 4px rgba(238,115,92,.22); }
+    .topline strong { color: #fff; font-weight: 500; }
+
+    .top-nav { position: sticky; top: 0; z-index: 30; background: rgba(247,244,238,.92); border-bottom: 1px solid var(--line); backdrop-filter: blur(12px); }
+    .top-nav-inner { max-width: 960px; margin-inline: auto; padding: 0 24px; min-height: 58px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    .back-link { display: inline-flex; align-items: center; gap: 7px; font: 600 12px "DM Sans", Arial, sans-serif; color: var(--muted); transition: color .15s; }
+    .back-link:hover { color: var(--ink); }
+    .back-link svg { width: 15px; height: 15px; }
+    .nav-ep { font: 500 11px "DM Mono", monospace; letter-spacing: .1em; text-transform: uppercase; color: var(--coral); }
+    .page-header { max-width: 960px; margin-inline: auto; padding: 44px 24px 30px; border-bottom: 1px solid var(--line); }
+    .ep-eyebrow { font: 500 10px "DM Mono", monospace; letter-spacing: .14em; text-transform: uppercase; color: var(--coral); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+    .ep-eyebrow::before { content: ""; width: 24px; height: 1px; background: var(--coral); }
+    .page-title { font: 800 clamp(28px, 4vw, 42px)/1.08 "Playfair Display", Georgia, serif; color: var(--navy); letter-spacing: -.03em; text-wrap: balance; margin-bottom: 14px; }
+    .page-title em { font-style: italic; color: var(--blue); }
+    .page-meta { display: flex; flex-wrap: wrap; gap: 6px 18px; font: 400 11px "DM Mono", monospace; color: var(--muted); }
+    .page-meta span { display: inline-flex; align-items: center; gap: 5px; }
+
+.main-wrap { max-width: 960px; margin-inline: auto; padding: 0 24px; }
+
+    /* Separador de secció */
+    .section-sep { padding: 40px 0 0; }
+    .section-sep + .doc-block { border-top: none; margin-top: 0; }
+    .section-label {
+      display: inline-flex; align-items: center; gap: 10px;
+      font: 700 10px "DM Mono", monospace;
+      letter-spacing: .16em; text-transform: uppercase;
+      color: var(--navy);
+      background: rgba(8,47,99,.07);
+      padding: 5px 12px; border-radius: 4px;
+      margin-bottom: 24px;
+    }
+
+    .doc-block { padding: 28px 0 0; }
+    .doc-block + .doc-block { border-top: 1px solid var(--line); margin-top: 36px; }
+
+    .doc-header { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 20px; }
+    .doc-icon { width: 44px; height: 44px; flex-shrink: 0; border-radius: 8px; display: grid; place-items: center; font-size: 22px; }
+    .doc-icon.pdf { background: rgba(220,55,45,.09); }
+
+    .doc-header-text { flex: 1; }
+    .doc-type-badge { display: inline-block; font: 600 9px "DM Mono", monospace; letter-spacing: .13em; text-transform: uppercase; background: rgba(8,47,99,.07); color: var(--blue); padding: 2px 7px; border-radius: 3px; margin-bottom: 5px; }
+    .doc-name { font: 700 19px/1.2 "DM Sans", Arial, sans-serif; color: var(--navy); margin-bottom: 3px; }
+    .doc-size { font: 400 11px "DM Mono", monospace; color: var(--muted); display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+
+    .dl-btn { display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--line); border-radius: 4px; background: var(--white); color: var(--ink); font: 600 11px "DM Sans", Arial, sans-serif; padding: 8px 13px; transition: background .15s, border-color .15s; white-space: nowrap; flex-shrink: 0; }
+    .dl-btn:hover { background: var(--deep); border-color: var(--muted); }
+    .dl-btn svg { width: 12px; height: 12px; }
+
+    .desc-label { display: none; }
+    .desc-field { display: block; width: 100%; min-height: 52px; padding: 14px 18px 14px 22px; background: var(--deep); border: none; border-left: 3px solid var(--coral); border-radius: 0 4px 4px 0; font: 400 15px/1.7 "DM Sans", Arial, sans-serif; color: var(--ink); outline: none; white-space: pre-wrap; transition: border-left-color .2s, background .2s; margin-bottom: 20px; }
+
+    .pdf-wrap { border: 1px solid var(--line); border-radius: 6px; overflow: hidden; background: #fff; }
+    .pdf-embed { width: 100%; height: 580px; border: none; display: block; }
+    .pdf-bar { border-top: 1px solid var(--line); background: var(--white); padding: 9px 16px; display: flex; align-items: center; justify-content: space-between; gap: 12px; font: 400 11px "DM Mono", monospace; color: var(--muted); }
+    .pdf-bar a { color: var(--blue); font-weight: 600; }
+
+    .page-footer { max-width: 960px; margin-inline: auto; padding: 40px 24px 64px; border-top: 1px solid var(--line); margin-top: 52px; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+    .footer-brand { font: 700 14px "Playfair Display", Georgia, serif; color: var(--muted); }
+    .footer-note { font: 400 11px "DM Mono", monospace; color: var(--muted); }
+
+    @media (max-width: 600px) {
+      .page-header, .main-wrap { padding-left: 16px; padding-right: 16px; }
+      .top-nav-inner, .topline-inner, .edit-hint { padding-left: 16px; padding-right: 16px; }
+      .doc-header { flex-wrap: wrap; }
+      .pdf-embed { height: 440px; }
+      .page-footer { padding: 32px 16px 48px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="topline">
+  <div class="topline-inner">
+    <span class="signal"><i></i><strong>Ep. 08</strong> · Fonts i documents</span>
+    <span>LaCalaPodcast · L'Ametlla de Mar</span>
+  </div>
+</div>
+
+<nav class="top-nav">
+  <div class="top-nav-inner">
+    <a class="back-link" href="lacalapodcast-forum.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      Tornar al Fòrum
+    </a>
+    <span class="nav-ep">La Història Completa</span>
+  </div>
+</nav>
+
+<header class="page-header">
+  <div class="ep-eyebrow">Episodi 08 · 2026</div>
+  <h1 class="page-title"><em>La Història Completa</em> — Fonts</h1>
+  <div class="page-meta">
+    <span>
+      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+      19 documents PDF
+    </span>
+    <span>
+      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+      8 seccions temàtiques
+    </span>
+  </div>
+</header>
+
+<div class="main-wrap">
+
+  <!-- ══════════════════════════════════════════════
+       SECCIÓ 1: L'ONADA
+  ══════════════════════════════════════════════ -->
+  <div class="section-sep">
+    <div class="section-label">§1 · L'Onada</div>
+
+    <div class="doc-block" id="onada-subhasta">
+      <div class="doc-header">
+        <div class="doc-icon pdf">📄</div>
+        <div class="doc-header-text">
+          <span class="doc-type-badge">Document oficial</span>
+          <div class="doc-name">Informe de subhasta de l'Onada</div>
+          <div class="doc-size">Ajuntament de l'Ametlla de Mar</div>
+        </div>
+        <a class="dl-btn" href="EPISODI%208/Documentaci%C3%B3%20rellevant/Onada/publicar/Informe_Subhasta_Onada.pdf" download>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Descarrega
+        </a>
+      </div>
+      <div class="desc-label">Context del document</div>
+      <div id="desc-onada" class="desc-field" data-key="lcp_ep8_desc_onada">Durant la campanya de la moció de censura es va afirmar que el govern de Junts-PSC havia "venut l'Onada". L'informe de subhasta acredita que l'únic element objecte de venda va ser la parcel·la sobre la qual es troba l'edifici — no el servei, no la gestió, no els residents. La parcel·la.</div>
+      <div class="pdf-wrap">
+        <embed class="pdf-embed" src="EPISODI%208/Documentaci%C3%B3%20rellevant/Onada/publicar/Informe_Subhasta_Onada.pdf" type="application/pdf">
+        <div class="pdf-bar">
+          <span>Informe de subhasta · Onada</span>
+          <a href="EPISODI%208/Documentaci%C3%B3%20rellevant/Onada/publicar/Informe_Subhasta_Onada.pdf" target="_blank">Obre en una nova pestanya →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       SECCIÓ 2: MARINA SANT JORDI
+  ══════════════════════════════════════════════ -->
+  <div class="section-sep">
+    <div class="section-label">§2 · Marina Sant Jordi</div>
+
+    <div class="doc-block" id="marina-correu">
+      <div class="doc-header">
+        <div class="doc-icon pdf">📄</div>
+        <div class="doc-header-text">
+          <span class="doc-type-badge">Document oficial</span>
+          <div class="doc-name">Correu de Marina Sant Jordi a Eva del Amo</div>
+          <div class="doc-size">Aportat per Ricardo Llaó · Ep. 7</div>
+        </div>
+        <a class="dl-btn" href="EPISODI%208/Documentaci%C3%B3%20rellevant/Marina%20Sant%20Jordi%20SL/publicar/Correu_MarinaSantJordi.pdf" download>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Descarrega
+        </a>
+      </div>
+      <div class="desc-label">Context del document</div>
+      <div id="desc-marina" class="desc-field" data-key="lcp_ep8_desc_marina">Quan el nou govern va arribar al poder va declarar que no hi havia "cap acord formalitzat" amb la promotora Marina Sant Jordi SL, que acumulava un deute de prop de set milions d'euros amb l'Ajuntament. Aquest correu, aportat per Ricardo Llaó a l'Ep. 7, documenta l'existència d'un acord en curs de formalització: la promotora confirma per escrit els termes acordats a l'alcaldessa Eva del Amo. El conveni estava en fase de redacció quan el govern va caure.</div>
+      <div class="pdf-wrap">
+        <embed class="pdf-embed" src="EPISODI%208/Documentaci%C3%B3%20rellevant/Marina%20Sant%20Jordi%20SL/publicar/Correu_MarinaSantJordi.pdf" type="application/pdf">
+        <div class="pdf-bar">
+          <span>Correu Marina Sant Jordi</span>
+          <a href="EPISODI%208/Documentaci%C3%B3%20rellevant/Marina%20Sant%20Jordi%20SL/publicar/Correu_MarinaSantJordi.pdf" target="_blank">Obre en una nova pestanya →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       SECCIÓ 3: PRESSUPOSTOS
+  ══════════════════════════════════════════════ -->
+  <div class="section-sep">
+    <div class="section-label">§3 · Pressupostos</div>
+
+    <div class="doc-block" id="pressupost-madrid">
+      <div class="doc-header">
+        <div class="doc-icon pdf">📄</div>
+        <div class="doc-header-text">
+          <span class="doc-type-badge">Document oficial</span>
+          <div class="doc-name">Pressupost 2026 enviat a Madrid</div>
+          <div class="doc-size">Ajuntament de l'Ametlla de Mar · Febrer 2026</div>
+        </div>
+        <a class="dl-btn" href="EPISODI%208/Documentaci%C3%B3%20rellevant/Pressupostos/publicar/Pressupost%202026%20enviat%20a%20Madrid.pdf" download>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Descarrega
+        </a>
+      </div>
+      <div class="desc-label">Context del document</div>
+      <div id="desc-pressupost-madrid" class="desc-field" data-key="lcp_ep8_desc_pres_madrid">Pressupost inicial del 2026 que el govern de Junts-PSC va remetre al Ministeri d'Hisenda —tal com obliga la llei— i que l'Ajuntament es va negar a facilitar-nos quan el vam demanar per instància. Total: 16,4 milions d'euros. Inclou la partida de 175.000€ per a l'arranjament de camins (codi 61902), eliminada en el pressupost definitiu aprovat pel nou govern.</div>
+      <div class="pdf-wrap">
+        <embed class="pdf-embed" src="EPISODI%208/Documentaci%C3%B3%20rellevant/Pressupostos/publicar/Pressupost%202026%20enviat%20a%20Madrid.pdf" type="application/pdf">
+        <div class="pdf-bar">
+          <span>Pressupost 2026 · versió remesa al Ministeri</span>
+          <a href="EPISODI%208/Documentaci%C3%B3%20rellevant/Pressupostos/publicar/Pressupost%202026%20enviat%20a%20Madrid.pdf" target="_blank">Obre en una nova pestanya →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="doc-block" id="pressupost-definitiu">
+      <div class="doc-header">
+        <div class="doc-icon pdf">📄</div>
+        <div class="doc-header-text">
+          <span class="doc-type-badge">Document oficial</span>
+          <div class="doc-name">Pressupost 2026 aprovat definitivament</div>
+          <div class="doc-size">Ajuntament de l'Ametlla de Mar · Maig 2026</div>
+        </div>
+        <a class="dl-btn" href="EPISODI%208/Documentaci%C3%B3%20rellevant/Pressupostos/publicar/Pressupost%202026%20aprovat%20definitivament.pdf" download>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Descarrega
+        </a>
+      </div>
+      <div class="desc-label">Context del document</div>
+      <div id="desc-pressupost-def" class="desc-field" data-key="lcp_ep8_desc_pres_def">Pressupost aprovat definitivament pel nou govern al maig del 2026. Total: 19,4 milions d'euros. La partida de 175.000€ per a l'arranjament de camins ha desaparegut. Gran part de l'augment respecte al pressupost anterior s'ha finançat amb romanents: diners que el govern anterior no va gastar i que han quedat acumulats a la caixa municipal.</div>
+      <div class="pdf-wrap">
+        <embed class="pdf-embed" src="EPISODI%208/Documentaci%C3%B3%20rellevant/Pressupostos/publicar/Pressupost%202026%20aprovat%20definitivament.pdf" type="application/pdf">
+        <div class="pdf-bar">
+          <span>Pressupost 2026 · versió definitiva</span>
+          <a href="EPISODI%208/Documentaci%C3%B3%20rellevant/Pressupostos/publicar/Pressupost%202026%20aprovat%20definitivament.pdf" target="_blank">Obre en una nova pestanya →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       SECCIÓ 4: TAXACIONS
+  ══════════════════════════════════════════════ -->
+  <div class="section-sep">
+    <div class="section-label">§4 · Taxacions de parcel·les</div>
+
+    <div class="doc-block" id="taxacio-informe">
+      <div class="doc-header">
+        <div class="doc-icon pdf">📄</div>
+        <div class="doc-header-text">
+          <span class="doc-type-badge">Document oficial</span>
+          <div class="doc-name">Informe tècnic de taxació de les parcel·les</div>
+          <div class="doc-size">Ajuntament de l'Ametlla de Mar</div>
+        </div>
+        <a class="dl-btn" href="EPISODI%208/Documentaci%C3%B3%20rellevant/Taxacions%20Parcel%C2%B7les/publicar/InformeTecnic_TaxacionsParcel%C2%B7les.pdf" download>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Descarrega
+        </a>
+      </div>
+      <div class="desc-label">Context del document</div>
+      <div id="desc-taxacio-inf" class="desc-field" data-key="lcp_ep8_desc_tax_inf">Informe tècnic que valora les parcel·les municipals del PAU Sant Jordi en 255.000 euros. El regidor d'Hisenda Antonio Espuny va prometre públicament que el nou govern n'obtindria 460.000 euros —gairebé el doble. Quan li vam demanar en quin informe tècnic es basava per fer aquesta afirmació, no en va aportar cap de nou.</div>
+      <div class="pdf-wrap">
+        <embed class="pdf-embed" src="EPISODI%208/Documentaci%C3%B3%20rellevant/Taxacions%20Parcel%C2%B7les/publicar/InformeTecnic_TaxacionsParcel%C2%B7les.pdf" type="application/pdf">
+        <div class="pdf-bar">
+          <span>Informe tècnic · taxació parcel·les PAU Sant Jordi</span>
+          <a href="EPISODI%208/Documentaci%C3%B3%20rellevant/Taxacions%20Parcel%C2%B7les/publicar/InformeTecnic_TaxacionsParcel%C2%B7les.pdf" target="_blank">Obre en una nova pestanya →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="doc-block" id="taxacio-acta-ple">
+      <div class="doc-header">
+        <div class="doc-icon pdf">📄</div>
+        <div class="doc-header-text">
+          <span class="doc-type-badge">Acta de ple</span>
+          <div class="doc-name">Acta del Ple 7/2026 — 19 de juny de 2026</div>
+          <div class="doc-size">Ajuntament de l'Ametlla de Mar</div>
+        </div>
+        <a class="dl-btn" href="EPISODI%208/Documentaci%C3%B3%20rellevant/Taxacions%20Parcel%C2%B7les/publicar/Acta%20PLE%207_2026%20de%2019_06_2026.pdf" download>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Descarrega
+        </a>
+      </div>
+      <div class="desc-label">Context del document</div>
+      <div id="desc-taxacio-acta" class="desc-field" data-key="lcp_ep8_desc_tax_acta">Acta del ple extraordinari d'aprovació definitiva del pressupost 2026. Recull l'al·legació formal de la regidora Ana Aragón per sobrevaloració dels ingressos derivats de la venda de les parcel·les del PAU Sant Jordi, recolzada per Eva del Amo (Junts). La resposta del regidor Espuny va ser el precedent d'una subhasta anterior. L'al·legació va ser desestimada per 7 vots a 6. Cap nova taxació tècnica va ser aportada.</div>
+      <div class="pdf-wrap">
+        <embed class="pdf-embed" src="EPISODI%208/Documentaci%C3%B3%20rellevant/Taxacions%20Parcel%C2%B7les/publicar/Acta%20PLE%207_2026%20de%2019_06_2026.pdf" type="application/pdf">
+        <div class="pdf-bar">
+          <span>Acta Ple 7/2026 · 19 juny 2026</span>
+          <a href="EPISODI%208/Documentaci%C3%B3%20rellevant/Taxacions%20Parcel%C2%B7les/publicar/Acta%20PLE%207_2026%20de%2019_06_2026.pdf" target="_blank">Obre en una nova pestanya →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       SECCIÓ 5: ASSESSORS
+  ══════════════════════════════════════════════ -->
+  <div class="section-sep">
+    <div class="section-label">§5 · Els assessors</div>
+
+    <div class="doc-block" id="assessors-llao">
+      <div class="doc-header">
+        <div class="doc-icon pdf">📄</div>
+        <div class="doc-header-text">
+          <span class="doc-type-badge">Decret d'alcaldia</span>
+          <div class="doc-name">Decret 2023-0785 — Nomenament Ricardo Llaó</div>
+          <div class="doc-size">Ajuntament de l'Ametlla de Mar · 13 juliol 2023</div>
+        </div>
+        <a class="dl-btn" href="EPISODI%208/Documentaci%C3%B3%20rellevant/Sou%20Assessors/publicar/20230713_Resoluci%C3%B3_DECRET%202023-0785%20%5BDecret%20nomenament%20c%C3%A0rrec%20eventual%202023-2027%5D.pdf" download>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Descarrega
+        </a>
+      </div>
+      <div class="desc-label">Context del document</div>
+      <div id="desc-llao" class="desc-field" data-key="lcp_ep8_desc_llao">Decret de nomenament de Ricardo Llaó Llaó com a assessor del govern Junts-PSC. Acredita la retribució: 55.790 euros bruts anuals (3.985€/mes en 14 pagues), aprovada pel Ple el 12 de juliol de 2023, jornada completa. El nou govern va criticar aquesta figura durant tota la campanya de la moció. Pàgina 1 del document.</div>
+      <div class="pdf-wrap">
+        <embed class="pdf-embed" src="EPISODI%208/Documentaci%C3%B3%20rellevant/Sou%20Assessors/publicar/20230713_Resoluci%C3%B3_DECRET%202023-0785%20%5BDecret%20nomenament%20c%C3%A0rrec%20eventual%202023-2027%5D.pdf" type="application/pdf">
+        <div class="pdf-bar">
+          <span>Decret 2023-0785 · Nomenament assessor</span>
+          <a href="EPISODI%208/Documentaci%C3%B3%20rellevant/Sou%20Assessors/publicar/20230713_Resoluci%C3%B3_DECRET%202023-0785%20%5BDecret%20nomenament%20c%C3%A0rrec%20eventual%202023-2027%5D.pdf" target="_blank">Obre en una nova pestanya →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="doc-block" id="assessors-jg15">
+      <div class="doc-header">
+        <div class="doc-icon pdf">📄</div>
+        <div class="doc-header-text">
+          <span class="doc-type-badge">Acta de junta de govern</span>
+          <div class="doc-name">Acta JG 2026-0015 — Assessorament jurídic</div>
+          <div class="doc-size">Ajuntament de l'Ametlla de Mar · 11 maig 2026 · Pàg. 63–64</div>
+        </div>
+        <a class="dl-btn" href="EPISODI%208/Documentaci%C3%B3%20rellevant/Sou%20Assessors/publicar/20260511_Acta_ACTA%20DE%20JUNTA%20DE%20GOVERN%202026-0015%20%5Bacta%2015%5D%20(1).pdf" download>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Descarrega
+        </a>
+      </div>
+      <div class="desc-label">Context del document</div>
+      <div id="desc-jg15" class="desc-field" data-key="lcp_ep8_desc_jg15">Acta de la Junta de Govern del nou govern (11 maig 2026). A les pàgines 63–64 (punt 8.1, Exp. 2135/2026) s'aprova el contracte menor d'assessorament jurídic per 14.500 euros anuals (IVA no inclòs). El professional contractat ja havia donat suport al govern d'ERC durant el mandat anterior (2015–2023).</div>
+      <div class="pdf-wrap">
+        <embed class="pdf-embed" src="EPISODI%208/Documentaci%C3%B3%20rellevant/Sou%20Assessors/publicar/20260511_Acta_ACTA%20DE%20JUNTA%20DE%20GOVERN%202026-0015%20%5Bacta%2015%5D%20(1).pdf" type="application/pdf">
+        <div class="pdf-bar">
+          <span>Acta JG 2026-0015 · Assessorament jurídic · pàg. 63–64</span>
+          <a href="EPISODI%208/Documentaci%C3%B3%20rellevant/Sou%20Assessors/publicar/20260511_Acta_ACTA%20DE%20JUNTA%20DE%20GOVERN%202026-0015%20%5Bacta%2015%5D%20(1).pdf" target="_blank">Obre en una nova pestanya →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="doc-block" id="assessors-jg17">
+      <div class="doc-header">
+        <div class="doc-icon pdf">📄</div>
+        <div class="doc-header-text">
+          <span class="doc-type-badge">Acta de junta de govern</span>
+          <div class="doc-name">Acta JG 2026-0017 — Assessorament urbanístic</div>
+          <div class="doc-size">Ajuntament de l'Ametlla de Mar · 21 maig 2026 · Pàg. 23–24</div>
+        </div>
+        <a class="dl-btn" href="EPISODI%208/Documentaci%C3%B3%20rellevant/Sou%20Assessors/publicar/20260521_Acta_ACTA%20DE%20JUNTA%20DE%20GOVERN%202026-0017%20%5Bacta%2017.2026%5D.pdf" download>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Descarrega
+        </a>
+      </div>
+      <div class="desc-label">Context del document</div>
+      <div id="desc-jg17" class="desc-field" data-key="lcp_ep8_desc_jg17">Acta de la Junta de Govern del nou govern (21 maig 2026). A les pàgines 23–24 (punt 8.1, Exp. 2374/2026) s'aprova el contracte menor d'assessorament urbanístic per 13.200 euros anuals (IVA no inclòs). El professional contractat ja havia donat suport al govern d'ERC durant el mandat anterior (2015–2023). Entre els dos assessors, el nou govern destina 27.700€/any —enfront dels 55.790€/any de Llaó.</div>
+      <div class="pdf-wrap">
+        <embed class="pdf-embed" src="EPISODI%208/Documentaci%C3%B3%20rellevant/Sou%20Assessors/publicar/20260521_Acta_ACTA%20DE%20JUNTA%20DE%20GOVERN%202026-0017%20%5Bacta%2017.2026%5D.pdf" type="application/pdf">
+        <div class="pdf-bar">
+          <span>Acta JG 2026-0017 · Assessorament urbanístic · pàg. 23–24</span>
+          <a href="EPISODI%208/Documentaci%C3%B3%20rellevant/Sou%20Assessors/publicar/20260521_Acta_ACTA%20DE%20JUNTA%20DE%20GOVERN%202026-0017%20%5Bacta%2017.2026%5D.pdf" target="_blank">Obre en una nova pestanya →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Requadre comparatiu assessors -->
+  <div style="margin: 36px 0 0; border: 1px solid var(--line); border-radius: 6px; overflow: hidden; background: var(--white);">
+    <div style="background: rgba(8,47,99,.06); padding: 12px 20px; border-bottom: 1px solid var(--line); display: flex; align-items: center; gap: 8px;">
+      <span style="font: 700 10px 'DM Mono', monospace; letter-spacing: .14em; text-transform: uppercase; color: var(--navy);">Comparació de jornada i retribució</span>
+    </div>
+    <div style="overflow-x: auto;">
+      <table style="width: 100%; border-collapse: collapse; font: 400 13px 'DM Sans', Arial, sans-serif;">
+        <thead>
+          <tr style="background: rgba(8,47,99,.04);">
+            <th style="text-align: left; padding: 10px 16px; font: 600 10px 'DM Mono', monospace; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); border-bottom: 1px solid var(--line);">Govern</th>
+            <th style="text-align: left; padding: 10px 16px; font: 600 10px 'DM Mono', monospace; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); border-bottom: 1px solid var(--line);">Figura</th>
+            <th style="text-align: left; padding: 10px 16px; font: 600 10px 'DM Mono', monospace; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); border-bottom: 1px solid var(--line);">Presència</th>
+            <th style="text-align: right; padding: 10px 16px; font: 600 10px 'DM Mono', monospace; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); border-bottom: 1px solid var(--line);">Cost anual</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="padding: 12px 16px; border-bottom: 1px solid var(--line); color: var(--muted); font-size: 12px; white-space: nowrap;">Junts-PSC · 2023–2026</td>
+            <td style="padding: 12px 16px; border-bottom: 1px solid var(--line); font-weight: 600; color: var(--navy);">Assessor d'alcaldia · 1 persona</td>
+            <td style="padding: 12px 16px; border-bottom: 1px solid var(--line); color: var(--ink);">Jornada completa · 5 dies/setmana</td>
+            <td style="padding: 12px 16px; border-bottom: 1px solid var(--line); text-align: right; font: 600 14px 'DM Mono', monospace; color: var(--ink); white-space: nowrap;">55.790 €</td>
+          </tr>
+          <tr>
+            <td style="padding: 12px 16px; border-bottom: 1px solid var(--line); color: var(--muted); font-size: 12px; white-space: nowrap;" rowspan="2">ERC-Entesa · des de 2026</td>
+            <td style="padding: 12px 16px; border-bottom: 1px solid var(--line); font-weight: 600; color: var(--navy);">Assessor jurídic · contracte menor</td>
+            <td style="padding: 12px 16px; border-bottom: 1px solid var(--line); color: var(--ink);">Mínim 2 dies/setmana presencial + telemàtic</td>
+            <td style="padding: 12px 16px; border-bottom: 1px solid var(--line); text-align: right; font: 600 14px 'DM Mono', monospace; color: var(--ink); white-space: nowrap;">17.545 € <span style="font: 400 10px 'DM Mono', monospace; color: var(--muted);">(IVA inclòs)</span></td>
+          </tr>
+          <tr>
+            <td style="padding: 12px 16px; border-bottom: 1px solid var(--line); font-weight: 600; color: var(--navy);">Assessor urbanístic · contracte menor</td>
+            <td style="padding: 12px 16px; border-bottom: 1px solid var(--line); color: var(--ink);">1 vegada/setmana presencial + telemàtic</td>
+            <td style="padding: 12px 16px; border-bottom: 1px solid var(--line); text-align: right; font: 600 14px 'DM Mono', monospace; color: var(--ink); white-space: nowrap;">15.972 € <span style="font: 400 10px 'DM Mono', monospace; color: var(--muted);">(IVA inclòs)</span></td>
+          </tr>
+          <tr style="background: rgba(8,47,99,.04);">
+            <td style="padding: 10px 16px; color: var(--muted); font-size: 12px;"></td>
+            <td style="padding: 10px 16px; font-weight: 700; color: var(--navy);" colspan="2">Total nou govern (2 persones · IVA inclòs)</td>
+            <td style="padding: 10px 16px; text-align: right; font: 700 14px 'DM Mono', monospace; color: var(--navy); white-space: nowrap;">33.517 €</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div style="padding: 10px 16px; background: var(--deep); font: 400 11px 'DM Mono', monospace; color: var(--muted); line-height: 1.6;">
+      Fonts: Decret 2023-0785 (Llaó · jornada completa); Acta JG 2026-0015 p.63 (assessor jurídic · mínim 2 dies/setmana); Acta JG 2026-0017 p.23 (assessor urbanístic · 1 dia/setmana).
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       SECCIÓ 6: COMUNICATS POLICIA LOCAL
+  ══════════════════════════════════════════════ -->
+  <div class="section-sep">
+    <div class="section-label">§6 · Comunicats de la Policia Local</div>
+
+    <div class="doc-block" id="pl-comunicat1">
+      <div class="doc-header">
+        <div class="doc-icon pdf">📄</div>
+        <div class="doc-header-text">
+          <span class="doc-type-badge">Document</span>
+          <div class="doc-name">Comunicat 1 — Ex comandaments</div>
+          <div class="doc-size">Àngel Martí Callau, Rodrigo Teba, Francesc Siuraneta Vilalta</div>
+        </div>
+        <a class="dl-btn" href="EPISODI%208/Documentaci%C3%B3%20rellevant/Limitacions/Comunicats%20Policia%20Local/publicar/comunicat-pl2.pdf" download>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Descarrega
+        </a>
+      </div>
+      <div class="desc-label">Context del document</div>
+      <div id="desc-pl1" class="desc-field" data-key="lcp_ep8_desc_pl1">Arran del debat de l'Ep. 6, tres ex comandaments de la Policia Local van enviar-nos aquest comunicat. Hi defensen la seva trajectòria professional i demanen que les crítiques s'articulin amb fets concrets, no amb insinuacions genèriques.</div>
+      <div class="pdf-wrap">
+        <embed class="pdf-embed" src="EPISODI%208/Documentaci%C3%B3%20rellevant/Limitacions/Comunicats%20Policia%20Local/publicar/comunicat-pl2.pdf" type="application/pdf">
+        <div class="pdf-bar">
+          <span>Comunicat PL 1 · ex comandaments</span>
+          <a href="EPISODI%208/Documentaci%C3%B3%20rellevant/Limitacions/Comunicats%20Policia%20Local/publicar/comunicat-pl2.pdf" target="_blank">Obre en una nova pestanya →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="doc-block" id="pl-comunicat2">
+      <div class="doc-header">
+        <div class="doc-icon pdf">📄</div>
+        <div class="doc-header-text">
+          <span class="doc-type-badge">Document</span>
+          <div class="doc-name">Comunicat 2 — Ramón Cid i agents actius (TIPs)</div>
+          <div class="doc-size">Signat per 11 membres de la plantilla activa</div>
+        </div>
+        <a class="dl-btn" href="EPISODI%208/Documentaci%C3%B3%20rellevant/Limitacions/Comunicats%20Policia%20Local/publicar/comunicat-pl1.pdf" download>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Descarrega
+        </a>
+      </div>
+      <div class="desc-label">Context del document</div>
+      <div id="desc-pl2" class="desc-field" data-key="lcp_ep8_desc_pl2">Comunicat signat per Ramón Cid en nom d'onze membres de la plantilla activa, identificats amb els seus números de TIP. Qualifica les declaracions d'Albert Bouzas (Ep. 6) de "totalment fora de lloc" i demana a l'Ajuntament que obri un expedient disciplinari. Cid va enviar-nos aquest comunicat directament per correu electrònic.</div>
+      <div class="pdf-wrap">
+        <embed class="pdf-embed" src="EPISODI%208/Documentaci%C3%B3%20rellevant/Limitacions/Comunicats%20Policia%20Local/publicar/comunicat-pl1.pdf" type="application/pdf">
+        <div class="pdf-bar">
+          <span>Comunicat PL 2 · Ramón Cid + agents actius</span>
+          <a href="EPISODI%208/Documentaci%C3%B3%20rellevant/Limitacions/Comunicats%20Policia%20Local/publicar/comunicat-pl1.pdf" target="_blank">Obre en una nova pestanya →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="doc-block" id="pl-decret-cid">
+      <div class="doc-header">
+        <div class="doc-icon pdf">📄</div>
+        <div class="doc-header-text">
+          <span class="doc-type-badge">Decret d'alcaldia</span>
+          <div class="doc-name">Decret 2023-1101 — Pujada complement Ramón Cid</div>
+          <div class="doc-size">Ajuntament de l'Ametlla de Mar · Octubre 2023</div>
+        </div>
+        <a class="dl-btn" href="EPISODI%208/Documentaci%C3%B3%20rellevant/Limitacions/Comunicats%20Policia%20Local/publicar/DECRET%202023-1101%20%5BDecret%20modificaci%C3%B3%20import%20productivitat%20Ramon%20Juan%20Cid%20Margalef%5D.pdf" download>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Descarrega
+        </a>
+      </div>
+      <div class="desc-label">Context del document</div>
+      <div id="desc-cid-decret" class="desc-field" data-key="lcp_ep8_desc_cid">Decret promogut per la regidora de recursos humans Maria José Castellano que augmenta el complement de productivitat de Ramón Cid de 312,02€ a 450,00€ bruts mensuals, a partir de l'octubre de 2023. El mateix Cid ha denunciat la pujada de 90€/mes per als treballadors del SUM promoguda per la mateixa Castellano, sense esmentar els 450€ que cobra ell gràcies a un decret signat per la mateixa regidora.</div>
+      <div class="pdf-wrap">
+        <embed class="pdf-embed" src="EPISODI%208/Documentaci%C3%B3%20rellevant/Limitacions/Comunicats%20Policia%20Local/publicar/DECRET%202023-1101%20%5BDecret%20modificaci%C3%B3%20import%20productivitat%20Ramon%20Juan%20Cid%20Margalef%5D.pdf" type="application/pdf">
+        <div class="pdf-bar">
+          <span>Decret 2023-1101 · complement productivitat Cid</span>
+          <a href="EPISODI%208/Documentaci%C3%B3%20rellevant/Limitacions/Comunicats%20Policia%20Local/publicar/DECRET%202023-1101%20%5BDecret%20modificaci%C3%B3%20import%20productivitat%20Ramon%20Juan%20Cid%20Margalef%5D.pdf" target="_blank">Obre en una nova pestanya →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="doc-block" id="pl-decret-revisio">
+      <div class="doc-header">
+        <div class="doc-icon pdf">📄</div>
+        <div class="doc-header-text">
+          <span class="doc-type-badge">Decret d'alcaldia</span>
+          <div class="doc-name">Decret 2026-1388 — Revisió d'ofici del Decret 2024-0419</div>
+          <div class="doc-size">Ajuntament de l'Ametlla de Mar · Setembre 2026</div>
+        </div>
+        <a class="dl-btn" href="EPISODI%208/Documentaci%C3%B3%20rellevant/Limitacions/Comunicats%20Policia%20Local/publicar/20260903_Resoluci%C3%B3_DECRET%202026-1388%20%5Bdecret%20revisio%20d%27ofici%20del%20decret%202024-0419%5D.pdf" download>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Descarrega
+        </a>
+      </div>
+      <div class="desc-label">Context del document</div>
+      <div id="desc-revisio" class="desc-field" data-key="lcp_ep8_desc_revisio">Arran de la denúncia de Ramón Cid, l'Ajuntament ha obert un procediment de revisió d'ofici del Decret 2024-0419 —que augmentava els salaris dels treballadors del SUM— i n'ha suspès cautelarment l'efecte mentre es resol. La resolució final la dictaminarà la Comissió Jurídica Assessora de la Generalitat.</div>
+      <div class="pdf-wrap">
+        <embed class="pdf-embed" src="EPISODI%208/Documentaci%C3%B3%20rellevant/Limitacions/Comunicats%20Policia%20Local/publicar/20260903_Resoluci%C3%B3_DECRET%202026-1388%20%5Bdecret%20revisio%20d%27ofici%20del%20decret%202024-0419%5D.pdf" type="application/pdf">
+        <div class="pdf-bar">
+          <span>Decret 2026-1388 · revisió d'ofici</span>
+          <a href="EPISODI%208/Documentaci%C3%B3%20rellevant/Limitacions/Comunicats%20Policia%20Local/publicar/20260903_Resoluci%C3%B3_DECRET%202026-1388%20%5Bdecret%20revisio%20d%27ofici%20del%20decret%202024-0419%5D.pdf" target="_blank">Obre en una nova pestanya →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       SECCIÓ 7: INSTÀNCIES I LIMITACIONS
+  ══════════════════════════════════════════════ -->
+  <div class="section-sep">
+    <div class="section-label">§7 · Instàncies i limitacions</div>
+
+    <div class="doc-block" id="instancia-1">
+      <div class="doc-header">
+        <div class="doc-icon pdf">📄</div>
+        <div class="doc-header-text">
+          <span class="doc-type-badge">Sol·licitud</span>
+          <div class="doc-name">Instància RE 4464 — Pressupostos i parcel·les</div>
+          <div class="doc-size">Marc Borràs Romeu · 24 juliol 2026</div>
+        </div>
+        <a class="dl-btn" href="EPISODI%208/Documentaci%C3%B3%20rellevant/Limitacions/Instancies/publicar/20260723_Sol%C2%B7licitud_SOL%C2%B7LICITUD.pdf" download>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Descarrega
+        </a>
+      </div>
+      <div class="desc-label">Context del document</div>
+      <div id="desc-inst1" class="desc-field" data-key="lcp_ep8_desc_inst1">Instància presentada el 24 de juliol de 2026 demanant el pressupost inicial 2026 enviat al Ministeri i la documentació de taxació de les parcel·les del PAU Sant Jordi d'Alfama. L'Ajuntament va denegar les peticions mitjançant el Decret 1372/2026 (mai notificat) i el Decret 1397/2026.</div>
+      <div class="pdf-wrap">
+        <embed class="pdf-embed" src="EPISODI%208/Documentaci%C3%B3%20rellevant/Limitacions/Instancies/publicar/20260723_Sol%C2%B7licitud_SOL%C2%B7LICITUD.pdf" type="application/pdf">
+        <div class="pdf-bar">
+          <span>Instància RE 4464 · 24 juliol 2026</span>
+          <a href="EPISODI%208/Documentaci%C3%B3%20rellevant/Limitacions/Instancies/publicar/20260723_Sol%C2%B7licitud_SOL%C2%B7LICITUD.pdf" target="_blank">Obre en una nova pestanya →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="doc-block" id="instancia-2">
+      <div class="doc-header">
+        <div class="doc-icon pdf">📄</div>
+        <div class="doc-header-text">
+          <span class="doc-type-badge">Sol·licitud</span>
+          <div class="doc-name">Instància RE 5157 — Identitat signants TIPs</div>
+          <div class="doc-size">Marc Borràs Romeu · 13 agost 2026</div>
+        </div>
+        <a class="dl-btn" href="EPISODI%208/Documentaci%C3%B3%20rellevant/Limitacions/Instancies/publicar/20260813_Sol%C2%B7licitud_SOL%C2%B7LICITUD%20D%27INST%C3%80NCIA.pdf" download>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Descarrega
+        </a>
+      </div>
+      <div class="desc-label">Context del document</div>
+      <div id="desc-inst2" class="desc-field" data-key="lcp_ep8_desc_inst2">Instància presentada el 13 d'agost de 2026 demanant la identificació nominal dels onze agents signataris del comunicat de la Policia Local. El termini legal de resposta era el 13 de setembre. L'Ajuntament no va respondre. El 14 de setembre es va presentar reclamació davant la GAIP (expedient 2026-E-RC-5156).</div>
+      <div class="pdf-wrap">
+        <embed class="pdf-embed" src="EPISODI%208/Documentaci%C3%B3%20rellevant/Limitacions/Instancies/publicar/20260813_Sol%C2%B7licitud_SOL%C2%B7LICITUD%20D%27INST%C3%80NCIA.pdf" type="application/pdf">
+        <div class="pdf-bar">
+          <span>Instància RE 5157 · 13 agost 2026</span>
+          <a href="EPISODI%208/Documentaci%C3%B3%20rellevant/Limitacions/Instancies/publicar/20260813_Sol%C2%B7licitud_SOL%C2%B7LICITUD%20D%27INST%C3%80NCIA.pdf" target="_blank">Obre en una nova pestanya →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="doc-block" id="decret-1372">
+      <div class="doc-header">
+        <div class="doc-icon pdf">📄</div>
+        <div class="doc-header-text">
+          <span class="doc-type-badge">Decret d'alcaldia</span>
+          <div class="doc-name">Decret 1372/2026 — Resposta a les instàncies</div>
+          <div class="doc-size">Ajuntament de l'Ametlla de Mar · 2 setembre 2026</div>
+        </div>
+        <a class="dl-btn" href="EPISODI%208/Documentaci%C3%B3%20rellevant/Limitacions/Instancies/publicar/20260902_Acord_DECRET%202026-1372%20Decret%20d%27Alcaldia%20autoritzant%20donar%20documentaci%C3%B3%20a%20particulars.pdf" download>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Descarrega
+        </a>
+      </div>
+      <div class="desc-label">Context del document</div>
+      <div id="desc-decret1372" class="desc-field" data-key="lcp_ep8_desc_1372">Decret d'alcaldia del 2 de setembre del 2026 que resol les instàncies RE 4464 i RE 5157: remet al portal de transparència per al pressupost definitiu i inadmet les peticions del pressupost inicial i de les taxacions. Aquest decret mai va ser notificat. Quan vam presentar el recurs potestatiu, l'Ajuntament va emetre l'endemà un segon decret (1397/2026) amb el mateix contingut, però notificat.</div>
+      <div class="pdf-wrap">
+        <embed class="pdf-embed" src="EPISODI%208/Documentaci%C3%B3%20rellevant/Limitacions/Instancies/publicar/20260902_Acord_DECRET%202026-1372%20Decret%20d%27Alcaldia%20autoritzant%20donar%20documentaci%C3%B3%20a%20particulars.pdf" type="application/pdf">
+        <div class="pdf-bar">
+          <span>Decret 1372/2026 · resposta instàncies</span>
+          <a href="EPISODI%208/Documentaci%C3%B3%20rellevant/Limitacions/Instancies/publicar/20260902_Acord_DECRET%202026-1372%20Decret%20d%27Alcaldia%20autoritzant%20donar%20documentaci%C3%B3%20a%20particulars.pdf" target="_blank">Obre en una nova pestanya →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="doc-block" id="recurs-potestatiu">
+      <div class="doc-header">
+        <div class="doc-icon pdf">📄</div>
+        <div class="doc-header-text">
+          <span class="doc-type-badge">Recurs administratiu</span>
+          <div class="doc-name">Recurs potestatiu de reposició</div>
+          <div class="doc-size">Marc Borràs Romeu · 6 setembre 2026</div>
+        </div>
+        <a class="dl-btn" href="EPISODI%208/Documentaci%C3%B3%20rellevant/Limitacions/Instancies/publicar/RECURS%20POTESTATIU%20DE%20REPOSICI%C3%93.pdf" download>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Descarrega
+        </a>
+      </div>
+      <div class="desc-label">Context del document</div>
+      <div id="desc-recurs" class="desc-field" data-key="lcp_ep8_desc_recurs">Recurs potestatiu de reposició presentat el 6 de setembre del 2026 contra el Decret 1372/2026, demanant la seva revocació parcial i l'entrega de la documentació denegada. L'endemà de rebre el recurs, l'Ajuntament va emetre un nou Decret (1397/2026) amb el mateix contingut que el 1372 —però aquest cop notificat—, i va al·legar que el recurs havia perdut l'objecte per substitució de l'acte impugnat.</div>
+      <div class="pdf-wrap">
+        <embed class="pdf-embed" src="EPISODI%208/Documentaci%C3%B3%20rellevant/Limitacions/Instancies/publicar/RECURS%20POTESTATIU%20DE%20REPOSICI%C3%93.pdf" type="application/pdf">
+        <div class="pdf-bar">
+          <span>Recurs potestatiu de reposició · 6 setembre 2026</span>
+          <a href="EPISODI%208/Documentaci%C3%B3%20rellevant/Limitacions/Instancies/publicar/RECURS%20POTESTATIU%20DE%20REPOSICI%C3%93.pdf" target="_blank">Obre en una nova pestanya →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="doc-block" id="resposta-recurs">
+      <div class="doc-header">
+        <div class="doc-icon pdf">📄</div>
+        <div class="doc-header-text">
+          <span class="doc-type-badge">Resolució</span>
+          <div class="doc-name">Decret 1513/2026 — Inadmissió del recurs potestatiu</div>
+          <div class="doc-size">Ajuntament de l'Ametlla de Mar · 24 setembre 2026</div>
+        </div>
+        <a class="dl-btn" href="EPISODI%208/Documentaci%C3%B3%20rellevant/Limitacions/Instancies/publicar/resposta-recurspotestatiu.pdf" download>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Descarrega
+        </a>
+      </div>
+      <div class="desc-label">Context del document</div>
+      <div id="desc-resposta-recurs" class="desc-field" data-key="lcp_ep8_desc_resp_recurs">Resposta de l'Ajuntament al recurs potestatiu. L'inadmet per "desaparició sobrevinguda de l'objecte": com que el Decret 1372/2026 va ser substituït pel 1397/2026 (notificat l'endemà del recurs), el recurs ja no té objecte. La via activa és la reclamació davant la GAIP, presentada el 14 de setembre de 2026.</div>
+      <div class="pdf-wrap">
+        <embed class="pdf-embed" src="EPISODI%208/Documentaci%C3%B3%20rellevant/Limitacions/Instancies/publicar/resposta-recurspotestatiu.pdf" type="application/pdf">
+        <div class="pdf-bar">
+          <span>Decret 1513/2026 · inadmissió recurs potestatiu · 24 setembre 2026</span>
+          <a href="EPISODI%208/Documentaci%C3%B3%20rellevant/Limitacions/Instancies/publicar/resposta-recurspotestatiu.pdf" target="_blank">Obre en una nova pestanya →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       SECCIÓ 8: PONT TRES CALES
+  ══════════════════════════════════════════════ -->
+  <div class="section-sep">
+    <div class="section-label">§8 · Pont de les Tres Cales</div>
+
+    <div class="doc-block" id="pont-sentencia">
+      <div class="doc-header">
+        <div class="doc-icon pdf">📄</div>
+        <div class="doc-header-text">
+          <span class="doc-type-badge">Sentència judicial</span>
+          <div class="doc-name">Sentència — Pont de les Tres Cales</div>
+          <div class="doc-size">Document públic</div>
+        </div>
+        <a class="dl-btn" href="EPISODI%208/Documentaci%C3%B3%20rellevant/Pont%20Tres%20Cales/publicar/STC-PontTresCales.pdf" download>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Descarrega
+        </a>
+      </div>
+      <div class="desc-label">Context del document</div>
+      <div id="desc-pont" class="desc-field" data-key="lcp_ep8_desc_pont">Sentència pública que documenta el cost que va suposar per a les arques municipals el pont de les Tres Cales. Els dos assessors actuals del nou govern ja havien donat suport al govern d'ERC durant el mandat anterior (2015–2023), període en el qual l'Ajuntament va haver d'assumir aquesta despesa.</div>
+      <div class="pdf-wrap">
+        <embed class="pdf-embed" src="EPISODI%208/Documentaci%C3%B3%20rellevant/Pont%20Tres%20Cales/publicar/STC-PontTresCales.pdf" type="application/pdf">
+        <div class="pdf-bar">
+          <span>Sentència · Pont de les Tres Cales</span>
+          <a href="EPISODI%208/Documentaci%C3%B3%20rellevant/Pont%20Tres%20Cales/publicar/STC-PontTresCales.pdf" target="_blank">Obre en una nova pestanya →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /main-wrap -->
+
+<footer class="page-footer">
+  <span class="footer-brand">LaCalaPodcast</span>
+  <span class="footer-note">Episodi 08 · L'Ametlla de Mar · 2026</span>
+</footer>
+
+</body>
+</html>
