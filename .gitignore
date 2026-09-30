@@ -35,10 +35,10 @@ actes_2002_2003.txt
 
 # Guions en PDF
 "Politica/EPISODI 6/Guió Ep.*.pdf"
-guio_forum_video.html
+Politica/guio_forum_video.html
 
 # ─── Formularis de consentiment i fitxers privats ────────────────────────────
-consentiment_*.html
+Politica/consentiment_*.html
 **/fulla-consentiment.html
 OBSERVACIONS.docx.pdf
 **/OBSERVACIONS.docx.pdf
@@ -50,7 +50,7 @@ Politica/EPISODI 3/EPISODI 3 - JORDI GASENI .pdf
 
 # ─── Pàgines d'anàlisi interna ────────────────────────────────────────────────
 estudi.html
-relat_politica_ametlla.html
+Politica/relat_politica_ametlla.html
 
 # ─── Pàgines internes d'Arxius Podcast ───────────────────────────────────────
 Arxius Podcast/index.html
@@ -68,7 +68,7 @@ Politica/EPISODI 8/**
 !Politica/EPISODI 8/Documentació rellevant/Limitacions/*/publicar/*.pdf
 
 # ─── PDF amb nom hash (intern) ────────────────────────────────────────────────
-SwMxWWwkKzvjlkYGh4paJhNT270_*.pdf
+Politica/SwMxWWwkKzvjlkYGh4paJhNT270_*.pdf
 
 # ─── Guió tertúlia EP.06 i EP.07 (interns) ────────────────────────────────────
 Politica/EPISODI 6/Guió*.pdf

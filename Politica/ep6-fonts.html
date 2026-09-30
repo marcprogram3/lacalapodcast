@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Ep.7 Fonts — LaCalaPodcast</title>
+  <title>Ep.6 Fonts — LaCalaPodcast</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Playfair+Display:ital,wght@0,700;0,800;1,700&display=swap">
   <style>
     /* ── Paleta fixa ─────────────────────────────── */
@@ -131,8 +131,7 @@
       border-radius: 8px; display: grid; place-items: center; font-size: 22px;
     }
     .doc-icon.pdf   { background: rgba(220,55,45,.09); }
-    .doc-icon.video { background: rgba(8,47,99,.08); }
-    .doc-icon.web   { background: rgba(8,47,99,.08); }
+    .doc-icon.video { background: rgba(255,0,0,.08); }
 
     .doc-header-text { flex: 1; }
     .doc-type-badge {
@@ -142,14 +141,13 @@
       background: rgba(8,47,99,.07); color: var(--blue);
       padding: 2px 7px; border-radius: 3px; margin-bottom: 5px;
     }
-    .doc-type-badge.web { background: rgba(8,47,99,.07); color: var(--navy); }
+    .doc-type-badge.video { background: rgba(255,0,0,.08); color: #c00; }
     .doc-name {
       font: 700 19px/1.2 "DM Sans", Arial, sans-serif;
       color: var(--navy); margin-bottom: 3px;
     }
     .doc-size {
       font: 400 11px "DM Mono", monospace; color: var(--muted);
-      display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
     }
     .dl-btn {
       display: inline-flex; align-items: center; gap: 6px;
@@ -200,60 +198,27 @@
     }
     .pdf-bar a { color: var(--blue); font-weight: 600; }
 
-    /* Targeta article web */
-    .web-card {
-      border: 1px solid var(--line); border-radius: 6px;
-      background: var(--white); overflow: hidden;
-    }
-    .web-card-inner {
-      padding: 22px 24px;
-      display: flex; align-items: center; justify-content: space-between; gap: 20px;
-    }
-    .web-card-text { flex: 1; min-width: 0; }
-    .web-source {
-      font: 600 9px "DM Mono", monospace;
-      letter-spacing: .13em; text-transform: uppercase;
-      color: var(--muted); margin-bottom: 6px;
-    }
-    .web-title {
-      font: 600 16px/1.4 "DM Sans", Arial, sans-serif;
-      color: var(--navy); margin-bottom: 6px;
-    }
-    .web-url {
-      font: 400 11px "DM Mono", monospace; color: var(--muted);
-      overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
-    }
-    .web-open-btn {
-      display: inline-flex; align-items: center; gap: 6px;
-      background: var(--navy); color: #fff;
-      font: 600 11px "DM Sans", Arial, sans-serif;
-      padding: 9px 15px; border-radius: 4px;
-      transition: background .15s; white-space: nowrap; flex-shrink: 0;
-    }
-    .web-open-btn:hover { background: var(--blue); }
-    .web-open-btn svg { width: 12px; height: 12px; }
-    .web-card-bar {
-      border-top: 1px solid var(--line); background: var(--paper);
-      padding: 8px 24px;
-      font: 400 10px "DM Mono", monospace; color: var(--muted);
-    }
-
-    /* Reproductor de vídeo local */
-    .timecode {
-      display: inline-flex; align-items: center;
+    /* Badge de timecode */
+    .yt-timecode {
+      display: inline-flex; align-items: center; gap: 5px;
       font: 600 10px "DM Mono", monospace;
       background: var(--navy); color: #fff;
       padding: 2px 8px; border-radius: 3px;
     }
+
+    /* Reproductor de vídeo local */
     .vid-wrap {
       border: 1px solid var(--line); border-radius: 6px;
       overflow: hidden; background: #000;
     }
-    .vid-wrap video { width: 100%; display: block; max-height: 540px; }
+    .vid-wrap video {
+      width: 100%; display: block;
+      max-height: 540px;
+    }
     .vid-bar {
       border-top: 1px solid var(--line); background: var(--white);
       padding: 9px 16px;
-      display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
       font: 400 11px "DM Mono", monospace; color: var(--muted);
     }
 
@@ -274,7 +239,6 @@
       .doc-header { flex-wrap: wrap; }
       .pdf-embed { height: 440px; }
       .page-footer { padding: 32px 16px 48px; }
-      .web-card-inner { flex-direction: column; align-items: flex-start; }
     }
   </style>
 </head>
@@ -283,7 +247,7 @@
 <!-- Topline -->
 <div class="topline">
   <div class="topline-inner">
-    <span class="signal"><i></i><strong>Ep. 07</strong> · Fonts i documents</span>
+    <span class="signal"><i></i><strong>Ep. 06</strong> · Fonts i documents</span>
     <span>LaCalaPodcast · L'Ametlla de Mar</span>
   </div>
 </div>
@@ -295,15 +259,15 @@
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
       Tornar al Fòrum
     </a>
-    <span class="nav-ep">El famós assessor</span>
+    <span class="nav-ep">Serveis públics municipals</span>
     <span class="saved-toast" id="saved-toast" aria-live="polite">✓ Guardat</span>
   </div>
 </nav>
 
 <!-- Capçalera -->
 <header class="page-header">
-  <div class="ep-eyebrow">Episodi 07 · 7 Juliol 2026</div>
-  <h1 class="page-title"><em>El famós assessor</em> — Fonts</h1>
+  <div class="ep-eyebrow">Episodi 06 · 18 Juny 2026</div>
+  <h1 class="page-title"><em>Serveis públics municipals</em> — Fonts</h1>
   <div class="page-meta">
     <span>
       <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
@@ -313,12 +277,8 @@
       <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
       1 fragment de vídeo
     </span>
-    <span>
-      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-      1 article web
-    </span>
   </div>
-  <a href="ep7-preguntes.html" style="display:inline-flex;align-items:center;gap:6px;margin-top:16px;font:600 12px 'DM Sans',Arial,sans-serif;color:var(--blue);text-decoration:none;">
+  <a href="ep6-preguntes.html" style="display:inline-flex;align-items:center;gap:6px;margin-top:16px;font:600 12px 'DM Sans',Arial,sans-serif;color:var(--blue);text-decoration:none;">
     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
     Veure preguntes de l'entrevista →
   </a>
@@ -333,16 +293,56 @@
 <!-- ═══════════════════════════════════════════════ -->
 <div class="main-wrap">
 
-  <!-- Document 1: Vídeo espunyratio (Q5) -->
-  <div class="doc-block" id="video-espuny-ratio">
+  <!-- Document 1: Acta del Ple 27/03/2025 (Q7) -->
+  <div class="doc-block" id="ple-270325">
+    <div class="doc-header">
+      <div class="doc-icon pdf">📄</div>
+      <div class="doc-header-text">
+        <span class="doc-type-badge">Document PDF</span>
+        <div class="doc-name">Acta del Ple — 27 de març de 2025</div>
+        <div class="doc-size">1,16 MB</div>
+      </div>
+      <a class="dl-btn" href="EPISODI 3/forumep3/20250603_Acta_Acta ple_ACTA DEL PLE 2025-0003 [Acta Ple 3_2025 de 27_03_2025].pdf" download="Acta Ple 27-03-2025 - Ep6 LaCalaPodcast.pdf">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Descarrega
+      </a>
+    </div>
+
+    <div class="desc-label">Context del document</div>
+    <div
+      id="desc-ple"
+      contenteditable="true"
+      class="desc-field"
+      data-placeholder="Escriu aquí el context d'aquest document..."
+      data-key="lcp_ep6_desc_ple"
+      role="textbox"
+      aria-multiline="true"
+    >Relacionat amb la pregunta 7 de l'entrevista. L'acta recull la denúncia de Jordi Gaseni —llavors a l'oposició— sobre 9 torns de Policia Local descoberts i 45 torns coberts per un sol agent durant el mes de març de 2025. La pregunta 7 confronta Ana Aragón —que era la regidora de Governació en aquell moment— amb aquesta denúncia documentada a l'acta oficial, i demana a Albert Bouzas —agent cap en funcions del cos en aquell moment— que confirmi o desmenteixi les xifres. Nota: aquest document apareix també a les fonts de l'Ep.3.</div>
+
+    <div class="pdf-wrap">
+      <embed
+        class="pdf-embed"
+        src="EPISODI 3/forumep3/20250603_Acta_Acta%20ple_ACTA%20DEL%20PLE%202025-0003%20%5BActa%20Ple%203_2025%20de%2027_03_2025%5D.pdf#page=1&view=FitH&toolbar=0&navpanes=0&scrollbar=0"
+        type="application/pdf"
+        title="Acta del Ple 27/03/2025 — pàgina 1"
+      >
+      <div class="pdf-bar">
+        <span>Acta del Ple 27/03/2025 · Primera pàgina</span>
+        <a href="EPISODI 3/forumep3/20250603_Acta_Acta ple_ACTA DEL PLE 2025-0003 [Acta Ple 3_2025 de 27_03_2025].pdf" target="_blank">Obre el document complet ↗</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Document 2: Fragment de vídeo YouTube (Q8) -->
+  <div class="doc-block" id="video-gaseni-sum">
     <div class="doc-header">
       <div class="doc-icon video">▶️</div>
       <div class="doc-header-text">
-        <span class="doc-type-badge">Fragment de vídeo</span>
-        <div class="doc-name">Antonio Espuny — "El ràtio d'endeutament és una fal·làcia"</div>
-        <div class="doc-size">187,8 MB · <span class="timecode">8:20 – 8:38</span></div>
+        <span class="doc-type-badge video">Fragment de vídeo</span>
+        <div class="doc-name">Ep.3 Jordi Gaseni — "Falta personal al SUM"</div>
+        <div class="doc-size">183,8 MB · <span class="yt-timecode">1:11:14 – 1:11:26</span></div>
       </div>
-      <a class="dl-btn" href="Politica/EPISODI 7/espunyratio.mp4" download="EspunyRatio-Ep7-LaCalaPodcast.mp4">
+      <a class="dl-btn" href="EPISODI 6/gaseniSUM.mp4" download="GaseniSUM-Ep6-LaCalaPodcast.mp4">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
         Descarrega
       </a>
@@ -354,98 +354,18 @@
       contenteditable="true"
       class="desc-field"
       data-placeholder="Escriu aquí el context d'aquest fragment..."
-      data-key="lcp_ep7_desc_video"
+      data-key="lcp_ep6_desc_video"
       role="textbox"
       aria-multiline="true"
-    >Relacionat amb la pregunta 5 de l'entrevista. Fragment en el qual Antonio Espuny afirma públicament que el ràtio d'endeutament és una "fal·làcia" (del minut 8:20 al 8:38). La pregunta 5 confronta Ricardo Llaó —l'assessor del govern que va aconseguir reduir el ràtio del 140% al 60,5%— amb aquesta declaració, i li demana que expliqui per quin mecanisme real va ser possible aquella reducció. Si Llaó explica el mecanisme, l'entrevistadora repreguntra: "Llavors per quin motiu Espuny la qualifica de fal·làcia?"</div>
+    >Relacionat amb la pregunta 8 de l'entrevista. Fragment de l'episodi 3 (entrevista amb Jordi Gaseni, del minut 1:11:14 al 1:11:26) en el qual l'actual alcalde reconeix públicament que, malgrat les ampliacions del govern anterior, encara falta personal al SUM per garantir el servei les 24 hores i els 7 dies de la setmana. La pregunta 8 confronta María José —treballadora actual del SUM i exregidora de Sanitat que va impulsar aquelles ampliacions— amb l'afirmació pública de l'alcalde: si ho confirma com a treballadora, contradiu la seva pròpia gestió com a regidora.</div>
 
     <div class="vid-wrap">
       <video controls preload="auto">
-        <source src="Politica/EPISODI%207/espunyratio.mp4" type="video/mp4">
+        <source src="EPISODI%206/gaseniSUM.mp4" type="video/mp4">
         El teu navegador no admet el reproductor de vídeo.
       </video>
       <div class="vid-bar">
-        <span>Antonio Espuny · Ep.5</span>
-        <span class="timecode">8:20 – 8:38</span>
-        <span>18 segons</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- Document 2: Article LaCalartv (Q9) -->
-  <div class="doc-block" id="article-marina-sant-jordi">
-    <div class="doc-header">
-      <div class="doc-icon web">🔗</div>
-      <div class="doc-header-text">
-        <span class="doc-type-badge web">Article web</span>
-        <div class="doc-name">L'Ajuntament tanca un acord amb Marina Sant Jordi SA per cobrar 6,9M€</div>
-        <div class="doc-size">La Cala RTV · 15 abril 2026</div>
-      </div>
-    </div>
-
-    <div class="desc-label">Context del document</div>
-    <div
-      id="desc-article"
-      contenteditable="true"
-      class="desc-field"
-      data-placeholder="Escriu aquí el context d'aquest document..."
-      data-key="lcp_ep7_desc_article"
-      role="textbox"
-      aria-multiline="true"
-    >Relacionat amb la pregunta 9 de l'entrevista. Article de La Cala RTV (15 d'abril de 2026) que informa de l'acord tancat entre l'Ajuntament i Marina Sant Jordi SA per cobrar els 6,9 milions d'euros pendents d'un conveni urbanístic signat el 2010. La pregunta 9 confronta Llaó amb la manca de documentació formal d'un acord previ de 2,8 milions que el govern de Junts-PSC afirmava tenir tancat amb el promotor, i li pregunta en quin estat es trobava realment el deute quan van deixar el poder.</div>
-
-    <div class="web-card">
-      <div class="web-card-inner">
-        <div class="web-card-text">
-          <div class="web-source">La Cala RTV · lacalartv.cat · 15 abril 2026</div>
-          <div class="web-title">L'Ajuntament tanca un acord amb Marina Sant Jordi SA per cobrar 6,9 milions d'euros pendents</div>
-          <div class="web-url">lacalartv.cat/2026/04/15/lajuntament-tanca-un-acord-amb-marina-sant-jordi-sa-per-cobrar-69-milions-deuros-pendents/</div>
-        </div>
-        <a class="web-open-btn" href="https://www.lacalartv.cat/2026/04/15/lajuntament-tanca-un-acord-amb-marina-sant-jordi-sa-per-cobrar-69-milions-deuros-pendents/" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-          Obre l'article
-        </a>
-      </div>
-      <div class="web-card-bar">Obre en una nova pestanya del navegador</div>
-    </div>
-  </div>
-
-  <!-- Document 3: Liquidació 2025 (Q10) -->
-  <div class="doc-block" id="liquidacio-2025">
-    <div class="doc-header">
-      <div class="doc-icon pdf">📄</div>
-      <div class="doc-header-text">
-        <span class="doc-type-badge">Document PDF</span>
-        <div class="doc-name">Liquidació del pressupost 2025</div>
-        <div class="doc-size">0,85 MB</div>
-      </div>
-      <a class="dl-btn" href="Politica/EPISODI 5/liquidació 2025.pdf" download="Liquidació-2025 - Ep7 LaCalaPodcast.pdf">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-        Descarrega
-      </a>
-    </div>
-
-    <div class="desc-label">Context del document</div>
-    <div
-      id="desc-liquidacio"
-      contenteditable="true"
-      class="desc-field"
-      data-placeholder="Escriu aquí el context d'aquest document..."
-      data-key="lcp_ep7_desc_liquidacio"
-      role="textbox"
-      aria-multiline="true"
-    >Relacionat amb la pregunta 10 de l'entrevista. Document oficial de liquidació del pressupost municipal del 2025, que reflecteix un estalvi net d'1.066.425 euros durant el mandat de Junts-PSC. La pregunta 10 confronta Llaó amb la coherència de la decisió de vendre la Residència d'Avis l'Onada si el govern tancava amb un estalvi positiu, i li pregunta en quin moment exacte es va prendre la decisió de venda i quin era el saldo de tresoreria en aquell moment. Nota: aquest document apareix també a les fonts de l'Ep.5.</div>
-
-    <div class="pdf-wrap">
-      <embed
-        class="pdf-embed"
-        src="Politica/EPISODI%205/liquidaci%C3%B3%202025.pdf#page=1&view=FitH&toolbar=0&navpanes=0&scrollbar=0"
-        type="application/pdf"
-        title="Liquidació pressupost 2025 — pàgina 1"
-      >
-      <div class="pdf-bar">
-        <span>Liquidació 2025 · Primera pàgina</span>
-        <a href="Politica/EPISODI 5/liquidació 2025.pdf" target="_blank">Obre el document complet ↗</a>
+        <span>Ep.3 · Jordi Gaseni · <span class="yt-timecode">1:11:14 – 1:11:26</span> · 12 segons</span>
       </div>
     </div>
   </div>
