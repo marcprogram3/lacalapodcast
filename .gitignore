@@ -34,7 +34,7 @@ tertulia*
 actes_2002_2003.txt
 
 # Guions en PDF
-"EPISODI 6/Guió Ep.*.pdf"
+"Politica/EPISODI 6/Guió Ep.*.pdf"
 guio_forum_video.html
 
 # ─── Formularis de consentiment i fitxers privats ────────────────────────────
@@ -44,9 +44,9 @@ OBSERVACIONS.docx.pdf
 **/OBSERVACIONS.docx.pdf
 
 # ─── PDFs de resum d'episodi (interns) ───────────────────────────────────────
-EPISODI 1/EPISODI 1. XAVIER DE LA FUENTE.pdf
-EPISODI 2/EPISODI 2 - ANA ARAGÓN.pdf
-EPISODI 3/EPISODI 3 - JORDI GASENI .pdf
+Politica/EPISODI 1/EPISODI 1. XAVIER DE LA FUENTE.pdf
+Politica/EPISODI 2/EPISODI 2 - ANA ARAGÓN.pdf
+Politica/EPISODI 3/EPISODI 3 - JORDI GASENI .pdf
 
 # ─── Pàgines d'anàlisi interna ────────────────────────────────────────────────
 estudi.html
@@ -57,22 +57,22 @@ Arxius Podcast/index.html
 Arxius Podcast/guio_video_presentacio.html
 
 # ─── Carpeta de l'episodi 8 (ignora tot excepte portada i PDFs publicats) ──────
-EPISODI 8/**
-!EPISODI 8/Portada conclusions .jpg
-!EPISODI 8/Documentació rellevant/
-!EPISODI 8/Documentació rellevant/*/
-!EPISODI 8/Documentació rellevant/Limitacions/*/
-!EPISODI 8/Documentació rellevant/*/publicar/
-!EPISODI 8/Documentació rellevant/Limitacions/*/publicar/
-!EPISODI 8/Documentació rellevant/*/publicar/*.pdf
-!EPISODI 8/Documentació rellevant/Limitacions/*/publicar/*.pdf
+Politica/EPISODI 8/**
+!Politica/EPISODI 8/Portada conclusions .jpg
+!Politica/EPISODI 8/Documentació rellevant/
+!Politica/EPISODI 8/Documentació rellevant/*/
+!Politica/EPISODI 8/Documentació rellevant/Limitacions/*/
+!Politica/EPISODI 8/Documentació rellevant/*/publicar/
+!Politica/EPISODI 8/Documentació rellevant/Limitacions/*/publicar/
+!Politica/EPISODI 8/Documentació rellevant/*/publicar/*.pdf
+!Politica/EPISODI 8/Documentació rellevant/Limitacions/*/publicar/*.pdf
 
 # ─── PDF amb nom hash (intern) ────────────────────────────────────────────────
 SwMxWWwkKzvjlkYGh4paJhNT270_*.pdf
 
 # ─── Guió tertúlia EP.06 i EP.07 (interns) ────────────────────────────────────
-EPISODI 6/Guió*.pdf
-EPISODI 6/guio_ep06*.html
+Politica/EPISODI 6/Guió*.pdf
+Politica/EPISODI 6/guio_ep06*.html
 
 # ─── Configuració de Claude Code (privat) ─────────────────────────────────────
 .claude/
