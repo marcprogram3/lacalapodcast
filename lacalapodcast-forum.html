@@ -240,22 +240,6 @@
     .manifesto-item strong { display: block; color: var(--navy); font: 700 17px var(--display); margin-bottom: 6px; }
     .manifesto-item p { margin: 0; color: var(--muted); font-size: 13px; }
 
-    .articles-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 20px; margin-top: 24px; }
-    .article-card {
-      background: var(--white); border: 1px solid var(--line); border-top: 0;
-      padding: 0; display: flex; flex-direction: column;
-      overflow: hidden; transition: transform .2s, box-shadow .2s;
-    }
-    .article-card:hover { transform: translateY(-4px); box-shadow: 0 12px 28px rgba(8,47,99,.09); }
-    .article-visual { width: 100%; height: 150px; display: block; flex: 0 0 150px; }
-    .article-body { padding: 20px 24px 18px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
-    .article-topic { font: 500 10px var(--mono); color: var(--blue); text-transform: uppercase; letter-spacing: .12em; }
-    .article-card h3 { margin: 0; color: var(--navy); font: 700 21px/1.15 var(--display); letter-spacing: -.025em; }
-    .article-card p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.55; flex: 1; }
-    .article-foot { display: flex; align-items: center; justify-content: space-between; padding-top: 14px; border-top: 1px solid var(--line); margin-top: 6px; }
-    .article-badge { background: var(--paper-deep); color: var(--muted); font: 600 10px var(--mono); padding: 2px 8px; text-transform: uppercase; letter-spacing: .08em; }
-    .article-link { color: var(--blue); font-size: 12px; font-weight: 700; }
-
     .newsletter {
       margin-top: 70px; padding: 38px 42px; background: var(--coral); color: #fff;
       display: flex; justify-content: space-between; align-items: center; gap: 34px;
@@ -406,7 +390,6 @@
       </a>
       <nav aria-label="Navegació principal">
         <a class="active" href="#episodis" onclick="document.getElementById('episodis').scrollIntoView({behavior:'smooth'});return false;">Episodis</a>
-        <a href="#articles" onclick="document.getElementById('articles').scrollIntoView({behavior:'smooth'});return false;">Articles</a>
         <a href="#metode" onclick="document.getElementById('metode').scrollIntoView({behavior:'smooth'});return false;">El m&egrave;tode</a>
         <a class="nav-cta" href="#subscriu" onclick="document.getElementById('subscriu').scrollIntoView({behavior:'smooth'});return false;">Alertes</a>
       </nav>
@@ -584,30 +567,7 @@
       </div>
     </section>
 
-    <section class="section" id="articles">
-      <div class="wrap">
-        <div class="section-rule">
-          <div><span class="label">Nova secci&oacute;</span><h2>Articles</h2></div>
-          <p>Temes que no arriben a episodi, per&ograve; que mereixen atenci&oacute;. Documents, contextos i preguntes obertes.</p>
-        </div>
-        <div class="articles-grid">
-
-                    <a class="article-card" href="PLATER/esborrany-article-plater.html">
-            <img class="article-visual" src="PLATER/PLATER-20260728T145118Z-1-001/PLATER/header-plater.jpeg" alt="Header PLATER" style="object-fit:cover;">
-            <div class="article-body">
-              <div class="article-topic">Territori &middot; Energia</div>
-              <h3>El PLATER: qu&egrave; &eacute;s, com afecta l&#x27;Ametlla de Mar i quin ha estat el proc&eacute;s d&#x27;informaci&oacute;</h3>
-              <p>El pla de la Generalitat que decideix on s&#x27;instal&middot;laran els parcs d&#x27;energia e&ograve;lica i solar fins al 2050. Cronologia, xifres del Baix Ebre i les al&middot;legacions presentades.</p>
-              <div class="article-foot">
-                <span class="article-badge">Esborrany</span>
-                <span class="article-link">Llegir l&#x27;article &rarr;</span>
-              </div>
-            </div>
-          </a>
-
-        </div>
-      </div>
-    </section>
+    
 
     <section class="wrap manifesto" id="metode">
       <div>
